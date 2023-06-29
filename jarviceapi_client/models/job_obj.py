@@ -21,9 +21,9 @@ import json
 
 from typing import Dict, List, Optional
 from pydantic import BaseModel, Field, StrictBool, StrictInt, StrictStr, conlist
-from openapi_client.models.app_def_ident import AppDefIdent
-from openapi_client.models.job_obj_vault import JobObjVault
-from openapi_client.models.job_upload import JobUpload
+from jarviceapi_client.models.app_def_ident import AppDefIdent
+from jarviceapi_client.models.job_obj_vault import JobObjVault
+from jarviceapi_client.models.job_upload import JobUpload
 
 class JobObj(BaseModel):
     """

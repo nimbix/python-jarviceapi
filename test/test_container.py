@@ -16,9 +16,9 @@
 import unittest
 import datetime
 
-import openapi_client
-from openapi_client.models.container import Container  # noqa: E501
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.container import Container  # noqa: E501
+from jarviceapi_client.rest import ApiException
 
 class TestContainer(unittest.TestCase):
     """Container unit test stubs"""
@@ -36,7 +36,7 @@ class TestContainer(unittest.TestCase):
             optional params are included """
         # uncomment below to create an instance of `Container`
         """
-        model = openapi_client.models.container.Container()  # noqa: E501
+        model = jarviceapi_client.models.container.Container()  # noqa: E501
         if include_optional :
             return Container(
                 image = '', 

@@ -16,9 +16,9 @@
 import unittest
 import datetime
 
-import openapi_client
-from openapi_client.models.par_def import ParDef  # noqa: E501
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.par_def import ParDef  # noqa: E501
+from jarviceapi_client.rest import ApiException
 
 class TestParDef(unittest.TestCase):
     """ParDef unit test stubs"""
@@ -36,7 +36,7 @@ class TestParDef(unittest.TestCase):
             optional params are included """
         # uncomment below to create an instance of `ParDef`
         """
-        model = openapi_client.models.par_def.ParDef()  # noqa: E501
+        model = jarviceapi_client.models.par_def.ParDef()  # noqa: E501
         if include_optional :
             return ParDef(
                 cmdscript = True, 
@@ -60,7 +60,7 @@ class TestParDef(unittest.TestCase):
                 step = '', 
                 target = '', 
                 type = '', 
-                value = openapi_client.models.value.value(), 
+                value = jarviceapi_client.models.value.value(), 
                 values = [
                     ''
                     ], 

@@ -21,8 +21,8 @@ import json
 
 from typing import Optional
 from pydantic import BaseModel
-from openapi_client.models.rt_metrics_itemized import RTMetricsItemized
-from openapi_client.models.rt_metrics_summary import RTMetricsSummary
+from jarviceapi_client.models.rt_metrics_itemized import RTMetricsItemized
+from jarviceapi_client.models.rt_metrics_summary import RTMetricsSummary
 
 class RuntimeMetrics(BaseModel):
     """

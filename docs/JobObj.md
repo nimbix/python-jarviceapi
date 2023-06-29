@@ -63,7 +63,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.job_obj import JobObj
+from jarviceapi_client.models.job_obj import JobObj
 
 # TODO update the JSON string below
 json = "{}"

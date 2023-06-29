@@ -16,9 +16,9 @@
 import unittest
 import datetime
 
-import openapi_client
-from openapi_client.models.rt_metrics_itemized import RTMetricsItemized  # noqa: E501
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.rt_metrics_itemized import RTMetricsItemized  # noqa: E501
+from jarviceapi_client.rest import ApiException
 
 class TestRTMetricsItemized(unittest.TestCase):
     """RTMetricsItemized unit test stubs"""
@@ -36,7 +36,7 @@ class TestRTMetricsItemized(unittest.TestCase):
             optional params are included """
         # uncomment below to create an instance of `RTMetricsItemized`
         """
-        model = openapi_client.models.rt_metrics_itemized.RTMetricsItemized()  # noqa: E501
+        model = jarviceapi_client.models.rt_metrics_itemized.RTMetricsItemized()  # noqa: E501
         if include_optional :
             return RTMetricsItemized(
                 cpu_used = [

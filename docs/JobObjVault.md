@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.job_obj_vault import JobObjVault
+from jarviceapi_client.models.job_obj_vault import JobObjVault
 
 # TODO update the JSON string below
 json = "{}"

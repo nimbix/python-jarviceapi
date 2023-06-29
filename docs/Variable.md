@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.variable import Variable
+from jarviceapi_client.models.variable import Variable
 
 # TODO update the JSON string below
 json = "{}"

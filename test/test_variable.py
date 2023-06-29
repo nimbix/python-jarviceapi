@@ -16,9 +16,9 @@
 import unittest
 import datetime
 
-import openapi_client
-from openapi_client.models.variable import Variable  # noqa: E501
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.variable import Variable  # noqa: E501
+from jarviceapi_client.rest import ApiException
 
 class TestVariable(unittest.TestCase):
     """Variable unit test stubs"""
@@ -36,7 +36,7 @@ class TestVariable(unittest.TestCase):
             optional params are included """
         # uncomment below to create an instance of `Variable`
         """
-        model = openapi_client.models.variable.Variable()  # noqa: E501
+        model = jarviceapi_client.models.variable.Variable()  # noqa: E501
         if include_optional :
             return Variable(
                 description = '', 

@@ -16,9 +16,9 @@
 import unittest
 import datetime
 
-import openapi_client
-from openapi_client.models.sched_job_status_entry import SchedJobStatusEntry  # noqa: E501
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.sched_job_status_entry import SchedJobStatusEntry  # noqa: E501
+from jarviceapi_client.rest import ApiException
 
 class TestSchedJobStatusEntry(unittest.TestCase):
     """SchedJobStatusEntry unit test stubs"""
@@ -36,7 +36,7 @@ class TestSchedJobStatusEntry(unittest.TestCase):
             optional params are included """
         # uncomment below to create an instance of `SchedJobStatusEntry`
         """
-        model = openapi_client.models.sched_job_status_entry.SchedJobStatusEntry()  # noqa: E501
+        model = jarviceapi_client.models.sched_job_status_entry.SchedJobStatusEntry()  # noqa: E501
         if include_optional :
             return SchedJobStatusEntry(
                 job_application = '', 

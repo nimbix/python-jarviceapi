@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.hpc_req import HpcReq
+from jarviceapi_client.models.hpc_req import HpcReq
 
 # TODO update the JSON string below
 json = "{}"

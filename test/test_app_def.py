@@ -16,9 +16,9 @@
 import unittest
 import datetime
 
-import openapi_client
-from openapi_client.models.app_def import AppDef  # noqa: E501
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.app_def import AppDef  # noqa: E501
+from jarviceapi_client.rest import ApiException
 
 class TestAppDef(unittest.TestCase):
     """AppDef unit test stubs"""
@@ -36,7 +36,7 @@ class TestAppDef(unittest.TestCase):
             optional params are included """
         # uncomment below to create an instance of `AppDef`
         """
-        model = openapi_client.models.app_def.AppDef()  # noqa: E501
+        model = jarviceapi_client.models.app_def.AppDef()  # noqa: E501
         if include_optional :
             return AppDef(
                 appdefversion = 56, 
@@ -46,7 +46,7 @@ class TestAppDef(unittest.TestCase):
                     ''
                     ], 
                 commands = {
-                    'key' : openapi_client.models.app_def_cmd.AppDefCmd(
+                    'key' : jarviceapi_client.models.app_def_cmd.AppDefCmd(
                         cmdscript = '', 
                         description = '', 
                         desktop = True, 
@@ -59,7 +59,7 @@ class TestAppDef(unittest.TestCase):
                         noconnect = True, 
                         noqueue = True, 
                         parameters = {
-                            'key' : openapi_client.models.par_def.ParDef(
+                            'key' : jarviceapi_client.models.par_def.ParDef(
                                 cmdscript = True, 
                                 description = '', 
                                 filter = '', 
@@ -81,7 +81,7 @@ class TestAppDef(unittest.TestCase):
                                 step = '', 
                                 target = '', 
                                 type = '', 
-                                value = openapi_client.models.value.value(), 
+                                value = jarviceapi_client.models.value.value(), 
                                 values = [
                                     ''
                                     ], 
@@ -95,7 +95,7 @@ class TestAppDef(unittest.TestCase):
                         scale_max = 56, 
                         url = '', 
                         variables = {
-                            'key' : openapi_client.models.variable.Variable(
+                            'key' : jarviceapi_client.models.variable.Variable(
                                 description = '', 
                                 inherit = True, 
                                 name = '', 
@@ -109,12 +109,12 @@ class TestAppDef(unittest.TestCase):
                 description = '', 
                 enablehpc = True, 
                 id = '', 
-                identity = openapi_client.models.app_def_ident.AppDefIdent(
+                identity = jarviceapi_client.models.app_def_ident.AppDefIdent(
                     gid = 56, 
                     group = '', 
                     uid = 56, 
                     username = '', ), 
-                image = openapi_client.models.app_def_image.AppDefImage(
+                image = jarviceapi_client.models.app_def_image.AppDefImage(
                     data = '', 
                     type = '', ), 
                 licensed = True, 
@@ -129,7 +129,7 @@ class TestAppDef(unittest.TestCase):
                 scale_max = 56, 
                 team = True, 
                 variables = {
-                    'key' : openapi_client.models.variable.Variable(
+                    'key' : jarviceapi_client.models.variable.Variable(
                         description = '', 
                         inherit = True, 
                         name = '', 

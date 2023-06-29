@@ -16,9 +16,9 @@
 import unittest
 import datetime
 
-import openapi_client
-from openapi_client.models.job_obj import JobObj  # noqa: E501
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.job_obj import JobObj  # noqa: E501
+from jarviceapi_client.rest import ApiException
 
 class TestJobObj(unittest.TestCase):
     """JobObj unit test stubs"""
@@ -36,7 +36,7 @@ class TestJobObj(unittest.TestCase):
             optional params are included """
         # uncomment below to create an instance of `JobObj`
         """
-        model = openapi_client.models.job_obj.JobObj()  # noqa: E501
+        model = jarviceapi_client.models.job_obj.JobObj()  # noqa: E501
         if include_optional :
             return JobObj(
                 app = '', 
@@ -63,7 +63,7 @@ class TestJobObj(unittest.TestCase):
                 hpc_envs = {
                     'key' : ''
                     }, 
-                identity = openapi_client.models.app_def_ident.AppDefIdent(
+                identity = jarviceapi_client.models.app_def_ident.AppDefIdent(
                     gid = 56, 
                     group = '', 
                     uid = 56, 
@@ -102,7 +102,7 @@ class TestJobObj(unittest.TestCase):
                 slots = 56, 
                 sshpriv = '', 
                 sshpub = '', 
-                upload = openapi_client.models.job_upload.JobUpload(
+                upload = jarviceapi_client.models.job_upload.JobUpload(
                     data = '', 
                     size = 56, 
                     target = '', ), 
@@ -114,11 +114,11 @@ class TestJobObj(unittest.TestCase):
                 variabletypes = {
                     'key' : ''
                     }, 
-                vault = openapi_client.models.job_obj_vault.JobObjVault(
+                vault = jarviceapi_client.models.job_obj_vault.JobObjVault(
                     auth = '', 
                     domain = '', 
                     force = True, 
-                    global = openapi_client.models.model_dict.ModelDict(), 
+                    global = jarviceapi_client.models.model_dict.ModelDict(), 
                     name = '', 
                     ro = True, ), 
                 verboseinit = True, 

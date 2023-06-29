@@ -16,9 +16,9 @@
 import unittest
 import datetime
 
-import openapi_client
-from openapi_client.models.hpc_req import HpcReq  # noqa: E501
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.hpc_req import HpcReq  # noqa: E501
+from jarviceapi_client.rest import ApiException
 
 class TestHpcReq(unittest.TestCase):
     """HpcReq unit test stubs"""
@@ -36,7 +36,7 @@ class TestHpcReq(unittest.TestCase):
             optional params are included """
         # uncomment below to create an instance of `HpcReq`
         """
-        model = openapi_client.models.hpc_req.HpcReq()  # noqa: E501
+        model = jarviceapi_client.models.hpc_req.HpcReq()  # noqa: E501
         if include_optional :
             return HpcReq(
                 hpc_envs = {

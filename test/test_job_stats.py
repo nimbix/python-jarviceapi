@@ -16,9 +16,9 @@
 import unittest
 import datetime
 
-import openapi_client
-from openapi_client.models.job_stats import JobStats  # noqa: E501
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.job_stats import JobStats  # noqa: E501
+from jarviceapi_client.rest import ApiException
 
 class TestJobStats(unittest.TestCase):
     """JobStats unit test stubs"""
@@ -36,7 +36,7 @@ class TestJobStats(unittest.TestCase):
             optional params are included """
         # uncomment below to create an instance of `JobStats`
         """
-        model = openapi_client.models.job_stats.JobStats()  # noqa: E501
+        model = jarviceapi_client.models.job_stats.JobStats()  # noqa: E501
         if include_optional :
             return JobStats(
                 app_cost = 1.337, 

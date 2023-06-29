@@ -16,9 +16,9 @@
 import unittest
 import datetime
 
-import openapi_client
-from openapi_client.models.machine import Machine  # noqa: E501
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.machine import Machine  # noqa: E501
+from jarviceapi_client.rest import ApiException
 
 class TestMachine(unittest.TestCase):
     """Machine unit test stubs"""
@@ -36,7 +36,7 @@ class TestMachine(unittest.TestCase):
             optional params are included """
         # uncomment below to create an instance of `Machine`
         """
-        model = openapi_client.models.machine.Machine()  # noqa: E501
+        model = jarviceapi_client.models.machine.Machine()  # noqa: E501
         if include_optional :
             return Machine(
                 nodes = 56, 

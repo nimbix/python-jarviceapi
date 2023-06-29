@@ -16,9 +16,9 @@
 import unittest
 import datetime
 
-import openapi_client
-from openapi_client.models.app_def_cmd import AppDefCmd  # noqa: E501
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.app_def_cmd import AppDefCmd  # noqa: E501
+from jarviceapi_client.rest import ApiException
 
 class TestAppDefCmd(unittest.TestCase):
     """AppDefCmd unit test stubs"""
@@ -36,7 +36,7 @@ class TestAppDefCmd(unittest.TestCase):
             optional params are included """
         # uncomment below to create an instance of `AppDefCmd`
         """
-        model = openapi_client.models.app_def_cmd.AppDefCmd()  # noqa: E501
+        model = jarviceapi_client.models.app_def_cmd.AppDefCmd()  # noqa: E501
         if include_optional :
             return AppDefCmd(
                 cmdscript = '', 
@@ -51,7 +51,7 @@ class TestAppDefCmd(unittest.TestCase):
                 noconnect = True, 
                 noqueue = True, 
                 parameters = {
-                    'key' : openapi_client.models.par_def.ParDef(
+                    'key' : jarviceapi_client.models.par_def.ParDef(
                         cmdscript = True, 
                         description = '', 
                         filter = '', 
@@ -73,7 +73,7 @@ class TestAppDefCmd(unittest.TestCase):
                         step = '', 
                         target = '', 
                         type = '', 
-                        value = openapi_client.models.value.value(), 
+                        value = jarviceapi_client.models.value.value(), 
                         values = [
                             ''
                             ], 
@@ -87,7 +87,7 @@ class TestAppDefCmd(unittest.TestCase):
                 scale_max = 56, 
                 url = '', 
                 variables = {
-                    'key' : openapi_client.models.variable.Variable(
+                    'key' : jarviceapi_client.models.variable.Variable(
                         description = '', 
                         inherit = True, 
                         name = '', 

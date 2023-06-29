@@ -1,4 +1,4 @@
-# openapi_client.StatusAndInformationApi
+# jarviceapi_client.StatusAndInformationApi
 
 All URIs are relative to *http://localhost*
 
@@ -39,22 +39,22 @@ Returns the Application Definition (AppDef) for a given application.
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.models.app_def import AppDef
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.app_def import AppDef
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.StatusAndInformationApi(api_client)
+    api_instance = jarviceapi_client.StatusAndInformationApi(api_client)
     apikey = 'apikey_example' # str | API key for user to authenticate
     username = 'username_example' # str | Name of user to authenticate
     name = 'name_example' # str | Name of application to return information for; please note this is the application ID, not necessarily the same as the name value in the AppDef
@@ -111,22 +111,22 @@ On success, a JSON payload with application information for each available appli
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.models.app_def import AppDef
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.app_def import AppDef
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.StatusAndInformationApi(api_client)
+    api_instance = jarviceapi_client.StatusAndInformationApi(api_client)
     apikey = 'apikey_example' # str | API key for user to authenticate  (optional)
     username = 'username_example' # str | Name of user to authenticate - if unspecified, public apps only (optional)
     name = 'all' # str | Name of application to return information for (optional) (default to 'all')
@@ -185,21 +185,21 @@ On success, a CSV file containing generated billing report 1. Endpoint is for JA
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.StatusAndInformationApi(api_client)
+    api_instance = jarviceapi_client.StatusAndInformationApi(api_client)
     apikey = 'apikey_example' # str | API key for user to authenticate
     username = 'username_example' # str | Name of user to authenticate
     reportuser = 'reportuser_example' # str | Comma separated list of users to filter (if not specified: list all users) (optional)
@@ -274,22 +274,22 @@ Requests the network address and user nimbix password (if set), for an interacti
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.models.runtime_connect import RuntimeConnect
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.runtime_connect import RuntimeConnect
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.StatusAndInformationApi(api_client)
+    api_instance = jarviceapi_client.StatusAndInformationApi(api_client)
     apikey = 'apikey_example' # str | API key for user to authenticate
     username = 'username_example' # str | Name of user to authenticate
     name = 'name_example' # str | Job name (name key returned from /jarvice/submit *Must be specifed or number is specified (optional)
@@ -349,21 +349,21 @@ Retrieves event logs for a running job that are related to the cluster infrastru
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.StatusAndInformationApi(api_client)
+    api_instance = jarviceapi_client.StatusAndInformationApi(api_client)
     apikey = 'apikey_example' # str | API key for user to authenticate 
     username = 'username_example' # str | Name of user to authenticate
     name = 'name_example' # str | Job name (name key returned from /jarvice/submit) (optional)
@@ -423,22 +423,22 @@ Get info from job
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.models.sched_job_status_entry import SchedJobStatusEntry
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.sched_job_status_entry import SchedJobStatusEntry
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.StatusAndInformationApi(api_client)
+    api_instance = jarviceapi_client.StatusAndInformationApi(api_client)
     apikey = 'apikey_example' # str | API key for user to authenticate
     username = 'username_example' # str | Name of user to authenticate
     name = 'name_example' # str | Job name (name key returned from /jarvice/submit *Must be specifed or number is specified (optional)
@@ -498,22 +498,22 @@ On success, a JSON payload with job status for each queued or running job (keyed
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.models.job_entry import JobEntry
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.job_entry import JobEntry
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.StatusAndInformationApi(api_client)
+    api_instance = jarviceapi_client.StatusAndInformationApi(api_client)
     apikey = 'apikey_example' # str | API key for user to authenticate 
     username = 'username_example' # str | Name of user to authenticate
     completed = False # bool | Set to true (case sensitive) to show only completed jobs (optional) (default to False)
@@ -570,21 +570,21 @@ No authorization required
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.StatusAndInformationApi(api_client)
+    api_instance = jarviceapi_client.StatusAndInformationApi(api_client)
     apikey = 'apikey_example' # str | API key for user to authenticate
     username = 'username_example' # str | Name of user to authenticate
 
@@ -639,21 +639,21 @@ Get info is API is alive
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.StatusAndInformationApi(api_client)
+    api_instance = jarviceapi_client.StatusAndInformationApi(api_client)
 
     try:
         # Get info is API is alive
@@ -701,21 +701,21 @@ Returns information about available machine type(s). On success, a JSON payload 
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.StatusAndInformationApi(api_client)
+    api_instance = jarviceapi_client.StatusAndInformationApi(api_client)
     apikey = 'apikey_example' # str | API key for user to authenticate 
     username = 'username_example' # str | Name of user to authenticate
     name = 'all' # str | Name of machine type to return information for (optional) (default to 'all')
@@ -774,22 +774,22 @@ Returns the last known CPU and memory utilization metrics for a given job. On su
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.models.runtime_metrics import RuntimeMetrics
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.runtime_metrics import RuntimeMetrics
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.StatusAndInformationApi(api_client)
+    api_instance = jarviceapi_client.StatusAndInformationApi(api_client)
     apikey = 'apikey_example' # str | API key for user to authenticate 
     username = 'username_example' # str | Name of user to authenticate
     name = 'name_example' # str | Job name (name key returned from /jarvice/submit) *Must be specifed or number is specified (optional)
@@ -849,21 +849,21 @@ Returns a tail (or optionally all) of the output of a completed job. On success,
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.StatusAndInformationApi(api_client)
+    api_instance = jarviceapi_client.StatusAndInformationApi(api_client)
     apikey = 'apikey_example' # str | API key for user to authenticate 
     username = 'username_example' # str | Name of user to authenticate
     name = 'name_example' # str | Job name (name key returned from /jarvice/submit) *Must be specifed or number is specified (optional)
@@ -925,21 +925,21 @@ No authorization required
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.StatusAndInformationApi(api_client)
+    api_instance = jarviceapi_client.StatusAndInformationApi(api_client)
     apikey = 'apikey_example' # str | API key for user to authenticate 
     username = 'username_example' # str | Name of user to authenticate
 
@@ -995,22 +995,22 @@ Retrieves event logs for a running job that are related to the cluster infrastru
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.models.queue import Queue
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.queue import Queue
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.StatusAndInformationApi(api_client)
+    api_instance = jarviceapi_client.StatusAndInformationApi(api_client)
     apikey = 'apikey_example' # str | API key for user to authenticate 
     username = 'username_example' # str | Name of user to authenticate
     name = 'all' # str | Name of queue to return information for (optional) (default to 'all')
@@ -1070,21 +1070,21 @@ Get info if DAL is ready
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.StatusAndInformationApi(api_client)
+    api_instance = jarviceapi_client.StatusAndInformationApi(api_client)
 
     try:
         # Get info if DAL is ready
@@ -1134,21 +1134,21 @@ Returns a screenshot for a running job (if it is graphical). On success, an imag
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.StatusAndInformationApi(api_client)
+    api_instance = jarviceapi_client.StatusAndInformationApi(api_client)
     apikey = 'apikey_example' # str | API key for user to authenticate
     username = 'username_example' # str | Name of user to authenticate
     name = 'name_example' # str | Job name (name key returned from /jarvice/submit *Must be specifed or number is specified (optional)
@@ -1215,22 +1215,22 @@ Queries status for a previously submitted job. Additional Notes: 1. One of name 
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.models.sched_job_status_entry import SchedJobStatusEntry
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.sched_job_status_entry import SchedJobStatusEntry
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.StatusAndInformationApi(api_client)
+    api_instance = jarviceapi_client.StatusAndInformationApi(api_client)
     apikey = 'apikey_example' # str | API key for user to authenticate
     username = 'username_example' # str | Name of user to authenticate
     name = 'name_example' # str | Job name (name key returned from /jarvice/submit *Must be specifed or number is specified (optional)
@@ -1290,21 +1290,21 @@ Returns a tail (or optionally all) of the output of a completed job. On success,
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.StatusAndInformationApi(api_client)
+    api_instance = jarviceapi_client.StatusAndInformationApi(api_client)
     apikey = 'apikey_example' # str | API key for user to authenticate 
     username = 'username_example' # str | Name of user to authenticate
     name = 'name_example' # str | Job name (name key returned from /jarvice/submit) *Must be specifed or number is specified (optional)
@@ -1366,22 +1366,22 @@ Returns job information and status for all queued and running jobs for an entire
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.models.job_entry import JobEntry
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.job_entry import JobEntry
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.StatusAndInformationApi(api_client)
+    api_instance = jarviceapi_client.StatusAndInformationApi(api_client)
     apikey = 'apikey_example' # str | API key for user to authenticate 
     username = 'username_example' # str | Name of user to authenticate
     completed = False # bool | Set to true (case sensitive) to show only completed jobs (optional) (default to False)
@@ -1438,22 +1438,22 @@ No authorization required
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.models.team_user import TeamUser
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.team_user import TeamUser
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.StatusAndInformationApi(api_client)
+    api_instance = jarviceapi_client.StatusAndInformationApi(api_client)
     apikey = 'apikey_example' # str | API key for user to authenticate
     username = 'username_example' # str | Name of user to authenticate
 
@@ -1508,21 +1508,21 @@ List files in a vault. On success, a list of lists in application/json format; e
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.StatusAndInformationApi(api_client)
+    api_instance = jarviceapi_client.StatusAndInformationApi(api_client)
     apikey = 'apikey_example' # str | API key for user to authenticate 
     username = 'username_example' # str | Name of user to authenticate
     vault = 'vault_example' # str | Name of vault to list files in

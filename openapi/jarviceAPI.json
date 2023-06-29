@@ -1,0 +1,3329 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Jarvice API",
+        "description": "The JARVICE API allows full control on running jobs as well as managing applications via PushToCompute™.",
+        "contact": {
+            "name": "Nimbix",
+            "email": "support@nimbix.net"
+        },
+        "license": {
+            "name": "Proprietary"
+        },
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "/"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Job Control",
+            "description": "These API endpoints allow you to submit jobs and control their execution. Jobs run on one or more compute nodes and launch the image of an application from the service catalog."
+        },
+        {
+            "name": "Status and Information",
+            "description": "These API endpoints allow you to query status or request information from running or completed jobs."
+        },
+        {
+            "name": "PushToCompute",
+            "description": "These API endpoints allow you to manage JARVICE application images via the PushToCompute™ subsystem. For more information on these mechanisms, please see CI/CD Pipeline."
+        }
+    ],
+    "paths": {
+        "/jarvice/action": {
+            "get": {
+                "tags": [
+                    "Job Control"
+                ],
+                "summary": "Perform a configured action on your job",
+                "description": "Executes an application-defined command inside a running job. The command runs asynchronously and its standard output/standard error is accessible with /jarvice/tail while the job is running.",
+                "operationId": "action-get",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "API key for user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Name of user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Job name (name key returned from /jarvice/submit *Must be specifed or number is specified",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "number",
+                        "in": "query",
+                        "description": "Job number (number key returned from /jarvice/submit) *Must be specifed or name is specified",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "action",
+                        "in": "query",
+                        "description": "The name of the action to run (must be a valid action from /jarvice/info)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{'status': 'action requested'}",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ModelDict"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required parameter(s) missing | No job specified | Bad Request | User required | Invalid parameter(s)",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "Job not found",
+                        "content": {}
+                    }
+                },
+                "deprecated": true
+            }
+        },
+        "/jarvice/appdef": {
+            "get": {
+                "tags": [
+                    "Status and Information"
+                ],
+                "summary": "Returns the Application Definition (AppDef) for a given application.",
+                "description": "Returns the Application Definition (AppDef) for a given application.",
+                "operationId": "appdef-get",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "API key for user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Name of user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Name of application to return information for; please note this is the application ID, not necessarily the same as the name value in the AppDef",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "On success, a JSON payload with the AppDef requested.",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AppDef"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required parameter(s) missing | Invalid parameter(s)",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/jarvice/apps": {
+            "get": {
+                "tags": [
+                    "Status and Information"
+                ],
+                "summary": "Returns the Application Definition (AppDef) for a given application.",
+                "description": "On success, a JSON payload with application information for each available application, or for the specific application name if available.\nThe application name is used as the dictionary key, and the data subkey contains the raw definition in JSON format.\nThe price value is the application price itself, not including underlying machine price (which is available by querying the machine type using /jarvice/machines).\nNote that application name is the application ID, not necessarily the same as the human readable name in the AppDef for the given application.",
+                "operationId": "apps-get",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "API key for user to authenticate ",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Name of user to authenticate - if unspecified, public apps only",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Name of application to return information for",
+                        "schema": {
+                            "type": "string",
+                            "default": "all"
+                        }
+                    },
+                    {
+                        "name": "version",
+                        "in": "query",
+                        "description": "Filter applications by appdef version",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of AppDef",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AppDef"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required parameter(s) missing | Invalid parameter(s)",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/jarvice/batch": {
+            "post": {
+                "tags": [
+                    "Job Control"
+                ],
+                "summary": "Submits a job for processing.",
+                "description": "Submits a job for processing.\nThe body is in JSON format similar to /jarvice/submit with the addition of the container blob.\nNOTE: Public containers from DockerHub must include the library/ prefix. e.g. library/ubuntu:latest\nOn success, a JSON payload indicating the job name and job number (with name and number keys).\nAdditional Notes:\n1. All boolean values default to false if not specified\n2. The nodes parameter in the machine section defaults to 1 if not specified\n3. Even if a vault section is specified, password is optional and should only be supplied for encrypted block vaults\n4. Even if vault section is specified, vault objects is optional and applies only to object storage vaults; it indicates which objects should be moved into the environments's backing store for processing. If readonly is set to false, JARVICE automatically copies any new or changed objects from the backing store back to the object storage on normal job completion (but not immediate termination with /jarvice/terminate).",
+                "operationId": "batch-post",
+                "requestBody": {
+                    "description": "JSON payload to run the compute job, generated as specified above. If copying from the web portal, paste the text into a file or script to use as the JSON payload to submit. Please note that authentication is performed from the username and apikey values in the JSON itself.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Submission"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "JSON payload indicating the job name and job number",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "object",
+                                        "properties": {}
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Missing or Malformed API Syntax | Invalid container in request | Container cannot create Application",
+                        "content": {}
+                    },
+                    "401": {
+                        "description": "Not Authorized | Account billing not active",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "Application Not Found",
+                        "content": {}
+                    },
+                    "429": {
+                        "description": "Only one active job allowed per VM",
+                        "content": {}
+                    },
+                    "500": {
+                        "description": "Error reading bytes | Unable to get user | Unable to create Job Object | Unable to create Job Submission",
+                        "content": {}
+                    },
+                    "501": {
+                        "description": "Failed to access user meta table",
+                        "content": {}
+                    }
+                },
+                "x-codegen-request-body-name": "json"
+            }
+        },
+        "/jarvice/billing": {
+            "get": {
+                "tags": [
+                    "Status and Information"
+                ],
+                "summary": "(JXE/System Admins only) Returns billing report for JARVICE users",
+                "description": "On success, a CSV file containing generated billing report\n1. Endpoint is for JARVICE XE System Administrators only\n2. If reportuser is a payer of a team, all team members are included\n3. Valid statuses fields are: COMPLETED, COMPLETED WITH ERROR, SUBMITTED, PROCESSING STARTING, CANCELED, EXEMPT, SEQUENTIALLY QUEUED, TERMINATED\n4. Valid machtypes can be queried using /jarvice/machines API\n5. startdate and enddate are required if timeperiod is set to range",
+                "operationId": "billing-get",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "API key for user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Name of user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "reportuser",
+                        "in": "query",
+                        "description": "Comma separated list of users to filter (if not specified: list all users)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "zone",
+                        "in": "query",
+                        "description": "Zone for machines",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "billingcode",
+                        "in": "query",
+                        "description": "Billing code to filter by",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "statuses",
+                        "in": "query",
+                        "description": "Comma seperated string of statuses to filter by",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "machtypes",
+                        "in": "query",
+                        "description": "Comma seperated string of machine types to filter",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "jobapp",
+                        "in": "query",
+                        "description": "Application name to filter by (e.g. jarvice-ubuntu)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "itemized",
+                        "in": "query",
+                        "description": "Set to true to generate itemized report",
+                        "schema": {
+                            "type": "string",
+                            "default": "false"
+                        }
+                    },
+                    {
+                        "name": "timeperiod",
+                        "in": "query",
+                        "description": "Includes jobs in the previous/current month or custom range (either last, current, or range)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "startdate",
+                        "in": "query",
+                        "description": "Range start of time period to generate report (YYYY-MM-DD)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "enddate",
+                        "in": "query",
+                        "description": "Range end of time period to generate report (YYYY-MM-DD)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "CSV file containing generated billing report",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required parameter(s) missing | Invalid parameter(s)",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/jarvice/build": {
+            "get": {
+                "tags": [
+                    "PushToCompute"
+                ],
+                "summary": "Builds a JARVICE application image for a Docker repository. The JARVICE application ID must already exist.",
+                "description": "Builds a JARVICE application image for a Docker repository. The JARVICE application ID must already exist.\nAdditional Notes :\n1. You will receive a notification once the build starts and completes, either with or without error, per your account's notification preferences\n2. If abort is specified, any running build is aborted immediately; if not, a build is scheduled; note that scheduling a build with one already running results in failure\n3. abort does not automatically schedule a new build - it merely changes the meaning of this endpoint from schedule to abort build",
+                "operationId": "build-get",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "API key for user to authenticate ",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Name of user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "Target application ID to build an image for (must exist)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "pull",
+                        "in": "query",
+                        "description": "On successful build, pull Docker repository into a JARVICE application image",
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    {
+                        "name": "abort",
+                        "in": "query",
+                        "description": "Abort a running image build ",
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A JSON payload with the status message in the status key.",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ModelDict"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required parameter(s) missing | Invalid parameter(s)",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/jarvice/connect": {
+            "get": {
+                "tags": [
+                    "Status and Information"
+                ],
+                "summary": "Requests the network address and user nimbix password (if set), for an interactive job.",
+                "description": "Requests the network address and user nimbix password (if set), for an interactive job.\nAdditional Notes :\n1. One of name or number must be specified\n2. Job must be running an application endpoint that has interactive set to true in its AppDef in order for it to respond successfully\n3. This method may take a few seconds to respond successfully after starting a job, as its connection parameters are not known until its application components start",
+                "operationId": "connect-get",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "API key for user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Name of user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Job name (name key returned from /jarvice/submit *Must be specifed or number is specified",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "number",
+                        "in": "query",
+                        "description": "Job number (number key returned from /jarvice/submit) *Must be specifed or name is specified",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Connection information",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RuntimeConnect"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required parameter(s) missing | No job specified | Bad Request | User required",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "Job not found",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/jarvice/events": {
+            "get": {
+                "tags": [
+                    "Status and Information"
+                ],
+                "summary": "(JXE/System Admins only) Retrieves event logs for a running job that are related to the cluster infrastructure",
+                "description": "Retrieves event logs for a running job that are related to the cluster infrastructure",
+                "operationId": "events-get",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "API key for user to authenticate ",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Name of user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Job name (name key returned from /jarvice/submit)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "number",
+                        "in": "query",
+                        "description": "Job number (number key returned from /jarvice/submit)",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Logs",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required parameter(s) missing | No job specified | Bad Request | User required",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "Job not found",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/jarvice/history": {
+            "get": {
+                "tags": [
+                    "PushToCompute"
+                ],
+                "summary": "Retrieve build/pull history for a JARVICE application image.",
+                "description": "Retrieve build/pull history for a JARVICE application image.\nOn success, the requested reverse chronological history (most recent first) in text/plain format (with single \\n for line breaks), up to and including the limit requested.\nBlank output indicates either the target does not exist, or has no associated build/pull history (yet).",
+                "operationId": "history-get",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "API key for user to authenticate ",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Name of user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "Target image name to get history for (usually same as the application ID)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "The number of entries to limit the output to",
+                        "schema": {
+                            "type": "integer",
+                            "default": 100
+                        }
+                    },
+                    {
+                        "name": "reltime",
+                        "in": "query",
+                        "description": "True : Use relative timestamps - False : Use absolute timestamps",
+                        "schema": {
+                            "type": "boolean",
+                            "default": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Chronological history",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required parameter(s) missing | Invalid parameter(s)",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/jarvice/info": {
+            "get": {
+                "tags": [
+                    "Status and Information"
+                ],
+                "summary": "Get info from job",
+                "description": "Get info from job",
+                "operationId": "info-get",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "API key for user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Name of user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Job name (name key returned from /jarvice/submit *Must be specifed or number is specified",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "number",
+                        "in": "query",
+                        "description": "Job number (number key returned from /jarvice/submit) *Must be specifed or name is specified",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/sched.JobStatusEntry"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required parameter(s) missing | No job specified | Bad Request | User required",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "Job not found",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/jarvice/jobs": {
+            "get": {
+                "tags": [
+                    "Status and Information"
+                ],
+                "summary": "Returns job information and status for all queued and running jobs.",
+                "description": "On success, a JSON payload with job status for each queued or running job (keyed by job number), formatted like the response of /jarvice/status",
+                "operationId": "jobs-get",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "API key for user to authenticate ",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Name of user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "completed",
+                        "in": "query",
+                        "description": "Set to true (case sensitive) to show only completed jobs",
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of jobs",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Jobs"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required parameter(s) missing | Invalid parameter(s)",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/jarvice/license": {
+            "get": {
+                "tags": [
+                    "Status and Information"
+                ],
+                "summary": "(JXE/System Admins only) Retrieves Jarvice license",
+                "description": "(JXE/System Admins only) Retrieves Jarvice license",
+                "operationId": "license-get",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "API key for user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Name of user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "License",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required parameter(s) missing | Invalid parameter(s)",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/jarvice/live": {
+            "get": {
+                "tags": [
+                    "Status and Information"
+                ],
+                "summary": "Get info is API is alive",
+                "description": "Get info is API is alive",
+                "operationId": "live-get",
+                "responses": {
+                    "200": {
+                        "description": "{'status': 'OK'}",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ModelDict"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/jarvice/machines": {
+            "get": {
+                "tags": [
+                    "Status and Information"
+                ],
+                "summary": "Returns information about available machine type(s).",
+                "description": "Returns information about available machine type(s).\nOn success, a JSON payload with machine information for each available machine type, or for the specific machine name if available. The machine name is used as the dictionary key.",
+                "operationId": "machines-get",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "API key for user to authenticate ",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Name of user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Name of machine type to return information for",
+                        "schema": {
+                            "type": "string",
+                            "default": "all"
+                        }
+                    },
+                    {
+                        "name": "vault",
+                        "in": "query",
+                        "description": "Vault name to use for machine compatibility; if specified, response will be a list of machines that can be used against that vault; if not specified, the user's default vault is used to determine machine compatibility",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of machines",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "object",
+                                        "properties": {}
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required parameter(s) missing | Invalid parameter(s)",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/jarvice/metrics": {
+            "get": {
+                "tags": [
+                    "Status and Information"
+                ],
+                "summary": "Returns the last known CPU and memory utilization metrics for a given job.",
+                "description": "Returns the last known CPU and memory utilization metrics for a given job.\nOn success, a JSON payload indicating summary values in the summary key, and itemized values (one for each parallel node in the job) in the itemized key.\nAdditional Notes :\n1. One of name or number must be specified\n2. cpu_used is always a percentage value (percentage of total CPU resource allocated), while memory_used and memory_total are always in kilobytes.\n3. In the summary section, cpu_used is the average of all CPU utilization across all nodes in the job, while the memory values are the sum total, in kilobytes.\n4. The percentage of memory utilized from the summary can be calculated by dividing memory_used by memory_total and multiplying by 100.\n5. All values are \"point in time\" rather than rolling average or any type of cumulative calculation, and are collected periodically (typically every 30 seconds)\n6. This endpoint may return a 404 for approximately the first minute that a job is running, until metrics become available",
+                "operationId": "metrics-get",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "API key for user to authenticate ",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Name of user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Job name (name key returned from /jarvice/submit) *Must be specifed or number is specified",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "number",
+                        "in": "query",
+                        "description": "Job number (number key returned from /jarvice/submit) *Must be specifed or name is specified",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RuntimeMetrics"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required parameter(s) missing | No job specified | Bad Request | User required",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "Job not found",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/jarvice/output": {
+            "get": {
+                "tags": [
+                    "Status and Information"
+                ],
+                "summary": "Returns a tail (or optionally all) of the output of a completed job.",
+                "description": "Returns a tail (or optionally all) of the output of a completed job.\nOn success, the requested output tail in text/plain format (with single \\n for line breaks), up to and including the number of lines requested; if the total length of the output is less than lines requested, the entire output is returned.\nIf lines requested is 0, all lines in the output are returned rather than just a tail of it.\nAdditional Notes :\n1. One of name or number must be specified\n2. Job must have completed; to get the output of a running job instead, use /jarvice/tail",
+                "operationId": "output-get",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "API key for user to authenticate ",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Name of user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Job name (name key returned from /jarvice/submit) *Must be specifed or number is specified",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "number",
+                        "in": "query",
+                        "description": "Job number (number key returned from /jarvice/submit) *Must be specifed or name is specified",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "lines",
+                        "in": "query",
+                        "description": "Number of lines to tail from the end - use 0 to return all lines rather than just a tail",
+                        "schema": {
+                            "type": "integer",
+                            "default": 100
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required parameter(s) missing | No job specified | Bad Request | User required",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "Job not found",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/jarvice/projects": {
+            "get": {
+                "tags": [
+                    "Status and Information"
+                ],
+                "summary": "(JXE/System Admins only) Returns all JARVICE projects and members",
+                "description": "(JXE/System Admins only) Returns all JARVICE projects and members\nAdditional Notes:\n1. Endpoint is for JARVICE XE System Administrators only\n2. Project name contains the project owner, <owner>-<project-name>",
+                "operationId": "projects-get",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "API key for user to authenticate ",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Name of user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "JSON payload with projects",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required parameter(s) missing | No job specified | Bad Request | User required",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "Job not found",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/jarvice/pull": {
+            "get": {
+                "tags": [
+                    "PushToCompute"
+                ],
+                "summary": "Pulls a Docker repository into a JARVICE application image. The JARVICE application image must already exist.",
+                "description": "Pulls a Docker repository into a JARVICE application image. The JARVICE application image must already exist.\nAdditional Notes :\n1. You will receive a notification once the pull starts and completes, either with or without error, per your account's notification preferences\n2. repo uses the same syntax as the docker pull does\n3. If pulling a private repository, you must log into the Docker registry in the JARVICE portal from the PushToCompute™ page first",
+                "operationId": "pull-get",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "API key for user to authenticate ",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Name of user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "repo",
+                        "in": "query",
+                        "description": "Docker repository to pull from",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "Target application ID to build an image for (must exist)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A JSON payload with the status message in the status key. {'status': 'Pull successfully scheduled'}",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ModelDict"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required parameter(s) missing | Invalid parameter(s)",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/jarvice/queues": {
+            "get": {
+                "tags": [
+                    "Status and Information"
+                ],
+                "summary": "(JXE only) Returns information about available queue(s).",
+                "description": "Retrieves event logs for a running job that are related to the cluster infrastructure",
+                "operationId": "queues-get",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "API key for user to authenticate ",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Name of user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Name of queue to return information for",
+                        "schema": {
+                            "type": "string",
+                            "default": "all"
+                        }
+                    },
+                    {
+                        "name": "info",
+                        "in": "query",
+                        "description": "Display additional info for each queue",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A JSON payload with an array of (string) available queues or when info=true, a JSON payload with queue information.",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Queue"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required parameter(s) missing | No job specified | Bad Request | User required",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "Queue not found",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/jarvice/ready": {
+            "get": {
+                "tags": [
+                    "Status and Information"
+                ],
+                "summary": "Get info if DAL is ready",
+                "description": "Get info if DAL is ready",
+                "operationId": "ready-get",
+                "responses": {
+                    "200": {
+                        "description": "{'status': 'OK'}",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "object",
+                                        "properties": {}
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "Queue not found",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/jarvice/screenshot": {
+            "get": {
+                "tags": [
+                    "Status and Information"
+                ],
+                "summary": "Returns a screenshot for a running job (if it is graphical).",
+                "description": "Returns a screenshot for a running job (if it is graphical).\nOn success, an image/png payload with the requested screenshot if available\nAdditional Notes:\n1. One of name or number must be specified\n2. If emphatic is not specified, but width and/or height is, the aspect ratio of the screenshot image is preserved when resizing.",
+                "operationId": "screenshot-get",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "API key for user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Name of user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Job name (name key returned from /jarvice/submit *Must be specifed or number is specified",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "number",
+                        "in": "query",
+                        "description": "Job number (number key returned from /jarvice/submit) *Must be specifed or name is specified",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "width",
+                        "in": "query",
+                        "description": "Pixel width to restrict screenshot to",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "height",
+                        "in": "query",
+                        "description": "Pixel height to restrict screenshot to",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "emphatic",
+                        "in": "query",
+                        "description": "If specified, emphatically resize (disregarding aspect ratio) to specified width and/or height",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "image/png payload with the requested screenshot if available.",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required parameter(s) missing | No job specified | Bad Request | User required",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "Job not found",
+                        "content": {}
+                    },
+                    "501": {
+                        "description": "Invalid image",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/jarvice/shutdown": {
+            "get": {
+                "tags": [
+                    "Job Control"
+                ],
+                "summary": "Requests a graceful termination of a job, executing the operating system poweroff mechanism if applicable.",
+                "description": "Requests a graceful termination of a job, executing the operating system poweroff mechanism if applicable.\nOn success: {\"status\": \"shutdown requested\"}\nA job not in PROCESSING STARTING status will return an error, e.g. {\"error\": \"Running job is not found\"}\nAdditional Notes:\n1. One of name or number must be specified\n2. Shutdown is requested asynchronously - job status can be monitored with /jarvice/status\n3. Current job status must be PROCESSING STARTING as indicated by output of /jarvice/status, e.g. {\"job_status\": \"PROCESSING STARTING\"}. For other states, see /jarvice/terminate",
+                "operationId": "shutdown-get",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "API key for user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Name of user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Job name (name key returned from /jarvice/submit *Must be specifed or number is specified",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "number",
+                        "in": "query",
+                        "description": "Job number (number key returned from /jarvice/submit) *Must be specifed or name is specified",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{'status': 'shutdown requested'}",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ModelDict"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required parameter(s) missing | No job specified | Bad Request | User required",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "{'error': 'Not found'}",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ModelDict"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/jarvice/signal": {
+            "get": {
+                "tags": [
+                    "Job Control"
+                ],
+                "summary": "Send a signal to a running job (e.g. SIGTSTP/20).",
+                "description": "Send a signal to a running job (e.g. SIGTSTP/20).\nOn success: {\"signal\": <signal>, \"pid\": <pid>}\nWhere pid is the process that receives the signal.\nAdditional Notes:\n1. One of name or number must be specified\n2. signal must use the integer representation for the signal\n3. /jarvice/signal will set the substatus 'Suspended by user' which is updated on the JARVICE Dashboard. This substatus is cleared by signaling SIGCONT/18. Processes that ignore SIGTSTP are not suspended even if the job substatus is set to 'Suspended by user'\n4. JarviceXE applications can override signal behavior by setting JARVICE_SIGNAL_OVERRIDE environment variable to a custom script to handle signals sent to the application from the JARVICE API. (see example Dockerfile using ENV to set JARVICE_SIGNAL_OVERRIDE and override script)",
+                "operationId": "signal-get",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "API key for user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Name of user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Job name (name key returned from /jarvice/submit *Must be specifed or number is specified",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "number",
+                        "in": "query",
+                        "description": "Job number (number key returned from /jarvice/submit) *Must be specifed or name is specified",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "signal",
+                        "in": "query",
+                        "description": "Signal to send to job",
+                        "schema": {
+                            "type": "integer",
+                            "default": 20
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{'signal': <signal>, 'pid': <pid>}",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ModelDict"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required parameter(s) missing | No job specified | Bad Request | User required",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "{'error': 'Not found'}",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ModelDict"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/jarvice/status": {
+            "get": {
+                "tags": [
+                    "Status and Information"
+                ],
+                "summary": "Queries status for a previously submitted job.",
+                "description": "Queries status for a previously submitted job.\nAdditional Notes:\n1. One of name or number must be specified\n2. All \"time\" values are represented in UNIX time (seconds since the Epoch); values may be 0 if the data is not yet available (e.g. a job that hasn't completed yet will have a 0 for job_end_time); additional values may be returned in the future.",
+                "operationId": "status-get",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "API key for user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Name of user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Job name (name key returned from /jarvice/submit *Must be specifed or number is specified",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "number",
+                        "in": "query",
+                        "description": "Job number (number key returned from /jarvice/submit) *Must be specifed or name is specified",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A JSON payload with job status",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "$ref": "#/components/schemas/sched.JobStatusEntry"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required parameter(s) missing | No job specified | Bad Request | User required",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/jarvice/submit": {
+            "post": {
+                "tags": [
+                    "Job Control"
+                ],
+                "summary": "Submits a job for processing.",
+                "description": "Submits a job for processing.\nThe body is in JSON format and can be generated from the JARVICE web portal by clicking the PREVIEW SUBMISSION tab in the task builder and copying its contents to the clipboard.\nClick the copy icon above the SUBMIT button to copy the contents of the API call to the clipboard.\nNOTE: Adding the identity object in the submission json will replace the NIMBIX Application Environment nimbix user. The JARVICE API cannot override an identity set by an AppDef file.\nOn success, a JSON payload indicating the job name and job number (with name and number keys).\nAdditional Notes:\n1. All boolean values default to false if not specified\n2. The nodes parameter in the machine section defaults to 1 if not specified\n3. Even if a vault section is specified, password is optional and should only be supplied for encrypted block vaults\n4. Even if vault section is specified, vault objects is optional and applies only to object storage vaults; it indicates which objects should be moved into the environments's backing store for processing. If readonly is set to false, JARVICE automatically copies any new or changed objects from the backing store back to the object storage on normal job completion (but not immediate termination with /jarvice/terminate).\n5. ipaddr will be validated by the underlying platform for authorization for the user; it may also fail if the address is already assigned (but this won't be known until the job starts running).",
+                "operationId": "submit-post",
+                "requestBody": {
+                    "description": "JSON payload to run the compute job, generated as specified above. If copying from the web portal, paste the text into a file or script to use as the JSON payload to submit. Please note that authentication is performed from the username and apikey values in the JSON itself.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/JobObj"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "JSON payload indicating the job name and job number",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "object",
+                                        "properties": {}
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Missing or Malformed API Syntax | Container cannot create Application",
+                        "content": {}
+                    },
+                    "401": {
+                        "description": "Not Authorized | Account billing not active",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "Application Not Found",
+                        "content": {}
+                    },
+                    "429": {
+                        "description": "Only one active job allowed per VM",
+                        "content": {}
+                    },
+                    "500": {
+                        "description": "Error reading bytes | Unable to get user | Unable to create Job Object | Unable to create Job Submission",
+                        "content": {}
+                    },
+                    "501": {
+                        "description": "Failed to access user meta table",
+                        "content": {}
+                    }
+                },
+                "x-codegen-request-body-name": "json"
+            }
+        },
+        "/jarvice/tail": {
+            "get": {
+                "tags": [
+                    "Status and Information"
+                ],
+                "summary": "Returns a tail (or optionally all) of the output of a completed job.",
+                "description": "Returns a tail (or optionally all) of the output of a completed job.\nOn success, the requested output tail in text/plain format (with single \\n for line breaks), up to and including the number of lines requested; if the total length of the output is less than lines requested, the entire output is returned.\nIf lines requested is 0, all lines in the output are returned rather than just a tail of it.\nAdditional Notes :\n1. One of name or number must be specified\n2. Job must still be running; to get the output of a completed job instead, use /jarvice/output",
+                "operationId": "tail-get",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "API key for user to authenticate ",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Name of user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Job name (name key returned from /jarvice/submit) *Must be specifed or number is specified",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "number",
+                        "in": "query",
+                        "description": "Job number (number key returned from /jarvice/submit) *Must be specifed or name is specified",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "lines",
+                        "in": "query",
+                        "description": "Number of lines to tail from the end - use 0 to return all lines rather than just a tail",
+                        "schema": {
+                            "type": "integer",
+                            "default": 100
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required parameter(s) missing | No job specified | Bad Request | User required",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "Job not found",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/jarvice/teamjobs": {
+            "get": {
+                "tags": [
+                    "Status and Information"
+                ],
+                "summary": "Returns job information and status for all queued and running jobs for an entire team.",
+                "description": "Returns job information and status for all queued and running jobs for an entire team.\nOn success, a JSON payload with job status for each queued or running job (keyed by job number), formatted like the response of /jarvice/status\nNote: If username does not refer to a team payer, only jobs for that user will be listed",
+                "operationId": "teamjobs-get",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "API key for user to authenticate ",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Name of user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "completed",
+                        "in": "query",
+                        "description": "Set to true (case sensitive) to show only completed jobs",
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of jobs",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Jobs"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required parameter(s) missing | Invalid parameter(s)",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/jarvice/teamusers": {
+            "get": {
+                "tags": [
+                    "Status and Information"
+                ],
+                "summary": "(Team Admins only) Returns a list of JARVICE users who are members of the callers team",
+                "description": "(Team Admins only) Returns a list of JARVICE users who are members of the callers team\nOn success, a JSON payload with a list of team members",
+                "operationId": "teamusers-get",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "API key for user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Name of user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "JSON payload with a list of team members",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "$ref": "#/components/schemas/teamUser"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required parameter(s) missing | Invalid parameter(s)",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/jarvice/terminate": {
+            "get": {
+                "tags": [
+                    "Job Control"
+                ],
+                "summary": "Immediately terminates a running job. NB: This will terminate the job regardless of current status.",
+                "description": "Immediately terminates a running job. NB: This will terminate the job regardless of current status.\nBest Practice: Use the /jarvice/shutdown for a job in PROCESSING STARTING state and only use /jarvice/terminate for a job not in a PROCESSING STARTING state or not responding to a /jarvice/shutdown.\nOn success: {\"status\": \"terminated\"}\nA job not in PROCESSING STARTING status will return an error, e.g. {\"error\": \"Running job is not found\"}\nNotes: One of name or number must be specified",
+                "operationId": "terminate-get",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "API key for user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Name of user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Job name (name key returned from /jarvice/submit *Must be specifed or number is specified",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "number",
+                        "in": "query",
+                        "description": "Job number (number key returned from /jarvice/submit) *Must be specifed or name is specified",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{'status': 'shutdown requested'}",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required parameter(s) missing | No job specified | Bad Request | User required",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "{'error': 'Not found'}",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ModelDict"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/jarvice/validate": {
+            "post": {
+                "tags": [
+                    "PushToCompute"
+                ],
+                "summary": "Validates an AppDef (application definition).",
+                "description": "Validates an AppDef (application definition).\nA valid AppDef can be used to customize the user interface endpoints for an application, as well as descriptive metadata.\nResponse: A JSON payload with the boolean status in the valid key if successful, or a 400 error with a descriptive message on failure.\nNotes: Validation is done in a single pass and may not pinpoint the exact location of the error in every case",
+                "operationId": "validate-post",
+                "requestBody": {
+                    "description": "JSON payload containing an AppDef (application definition) to validate. Please see the Application Definition Guide for details on the format. A valid AppDef can be used to customize the user interface endpoints for an application, as well as descriptive metadata.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AppDef"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "{'valid': true}",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ModelDict"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error message",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-codegen-request-body-name": "json"
+            }
+        },
+        "/jarvice/vault": {
+            "get": {
+                "tags": [
+                    "Status and Information"
+                ],
+                "summary": "List files in a vault.",
+                "description": "List files in a vault.\nOn success, a list of lists in application/json format; each element pertains to a file or directory, and includes its name, size, and modification time\n\"modification time\" (3rd value in each element) is represented in UNIX time (seconds since the Epoch)\nAdditional Notes:\n1. Listing is not recursive - only the files in the directory specified by the path parameter are listed\n2. Directories are marked with a trailing / character\n3. Both size and modification time may be 0 if details is not true\n4. Sorting by anything other than name requires details to be set to true\n5. Requesting a detailed listing may be significantly slower for certain storage topologies or if listing very large numbers of files; use only if necessary",
+                "operationId": "vault-get",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "API key for user to authenticate ",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Name of user to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "vault",
+                        "in": "query",
+                        "description": "Name of vault to list files in",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "path",
+                        "in": "query",
+                        "description": "Directory in vault to list files in",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "details",
+                        "in": "query",
+                        "description": "Include file details such as size and modification time if set to true",
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "either n, s, or m to sort by name, size, or modification time (respectively) in ascending order; use uppercase for reverse sort",
+                        "schema": {
+                            "type": "string",
+                            "default": "\"n\""
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "File list",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required parameter(s) missing | Invalid parameter(s)",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "JobObj": {
+                "type": "object",
+                "properties": {
+                    "app": {
+                        "type": "string"
+                    },
+                    "app_owner": {
+                        "type": "string"
+                    },
+                    "appdefversion": {
+                        "type": "integer"
+                    },
+                    "arch": {
+                        "type": "string"
+                    },
+                    "cmdargs": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "cmdargtypes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "cmdscript": {
+                        "type": "string"
+                    },
+                    "command_line": {
+                        "type": "string"
+                    },
+                    "command_name": {
+                        "type": "string"
+                    },
+                    "cores": {
+                        "type": "integer"
+                    },
+                    "ctrsecret": {
+                        "type": "string"
+                    },
+                    "desktop": {
+                        "type": "boolean"
+                    },
+                    "devices": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "geometry": {
+                        "type": "string"
+                    },
+                    "gpus": {
+                        "type": "integer"
+                    },
+                    "hpc_envs": {
+                        "$ref": "#/components/schemas/HpcEnvs"
+                    },
+                    "identity": {
+                        "$ref": "#/components/schemas/AppDefIdent"
+                    },
+                    "interactive": {
+                        "type": "boolean"
+                    },
+                    "ipaddr": {
+                        "type": "string"
+                    },
+                    "job_label": {
+                        "type": "string"
+                    },
+                    "job_project": {
+                        "type": "string"
+                    },
+                    "jobtoken": {
+                        "type": "string"
+                    },
+                    "licenses": {
+                        "type": "string"
+                    },
+                    "machine": {
+                        "type": "string"
+                    },
+                    "memlimit": {
+                        "type": "integer"
+                    },
+                    "mpirun": {
+                        "type": "boolean"
+                    },
+                    "nae": {
+                        "type": "string"
+                    },
+                    "noconnect": {
+                        "type": "boolean"
+                    },
+                    "nodes": {
+                        "type": "integer"
+                    },
+                    "nopasssubt": {
+                        "type": "boolean",
+                        "description": "subt is not a typo"
+                    },
+                    "ports": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "privileged": {
+                        "type": "boolean"
+                    },
+                    "properties": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "publicip": {
+                        "type": "boolean"
+                    },
+                    "ram": {
+                        "type": "integer"
+                    },
+                    "repo": {
+                        "type": "string"
+                    },
+                    "scratch": {
+                        "type": "integer"
+                    },
+                    "slave_cores": {
+                        "type": "integer"
+                    },
+                    "slave_gpus": {
+                        "type": "integer"
+                    },
+                    "slave_properties": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "slave_ram": {
+                        "type": "integer"
+                    },
+                    "slave_scratch": {
+                        "type": "integer"
+                    },
+                    "slots": {
+                        "type": "integer"
+                    },
+                    "sshpriv": {
+                        "type": "string"
+                    },
+                    "sshpub": {
+                        "type": "string"
+                    },
+                    "upload": {
+                        "$ref": "#/components/schemas/JobUpload"
+                    },
+                    "url": {
+                        "type": "string"
+                    },
+                    "user": {
+                        "type": "string"
+                    },
+                    "variables": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    },
+                    "variabletypes": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    },
+                    "vault": {
+                        "$ref": "#/components/schemas/JobObjVault"
+                    },
+                    "verboseinit": {
+                        "type": "boolean"
+                    },
+                    "vmemlimit": {
+                        "type": "integer"
+                    },
+                    "walltime": {
+                        "type": "string"
+                    },
+                    "webshell": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "JobObjVault": {
+                "type": "object",
+                "properties": {
+                    "auth": {
+                        "type": "string"
+                    },
+                    "domain": {
+                        "type": "string"
+                    },
+                    "force": {
+                        "type": "boolean"
+                    },
+                    "global": {
+                        "$ref": "#/components/schemas/ModelDict"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "ro": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "JobUpload": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "string"
+                    },
+                    "size": {
+                        "type": "integer"
+                    },
+                    "target": {
+                        "type": "string"
+                    }
+                }
+            },
+            "teamUser": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "AppDef": {
+                "type": "object",
+                "properties": {
+                    "appdefversion": {
+                        "type": "integer"
+                    },
+                    "author": {
+                        "type": "string"
+                    },
+                    "certified": {
+                        "type": "boolean"
+                    },
+                    "classifications": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "commands": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/AppDefCmd"
+                        }
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "enablehpc": {
+                        "type": "boolean"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "identity": {
+                        "$ref": "#/components/schemas/AppDefIdent"
+                    },
+                    "image": {
+                        "$ref": "#/components/schemas/AppDefImage"
+                    },
+                    "licensed": {
+                        "type": "boolean"
+                    },
+                    "machines": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "nae": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "owner": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "type": "string",
+                        "description": "These are not in the JSON, but copied in\nXXX: Should this be removed?",
+                        "example": "0"
+                    },
+                    "public": {
+                        "type": "boolean"
+                    },
+                    "scale_max": {
+                        "type": "integer"
+                    },
+                    "team": {
+                        "type": "boolean"
+                    },
+                    "variables": {
+                        "$ref": "#/components/schemas/Variables"
+                    },
+                    "vault-types": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "walltime": {
+                        "type": "string"
+                    }
+                }
+            },
+            "AppDefCmd": {
+                "type": "object",
+                "properties": {
+                    "cmdscript": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "desktop": {
+                        "type": "boolean"
+                    },
+                    "interactive": {
+                        "type": "boolean"
+                    },
+                    "machines": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "mpirun": {
+                        "type": "boolean"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "noconnect": {
+                        "type": "boolean"
+                    },
+                    "noqueue": {
+                        "type": "boolean"
+                    },
+                    "parameters": {
+                        "$ref": "#/components/schemas/ParDefs"
+                    },
+                    "path": {
+                        "type": "string"
+                    },
+                    "ports": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "publicip": {
+                        "type": "boolean"
+                    },
+                    "scale_max": {
+                        "type": "integer"
+                    },
+                    "url": {
+                        "type": "string"
+                    },
+                    "variables": {
+                        "$ref": "#/components/schemas/Variables"
+                    },
+                    "verboseinit": {
+                        "type": "boolean"
+                    },
+                    "walltime": {
+                        "type": "string"
+                    },
+                    "webshell": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "AppDefIdent": {
+                "type": "object",
+                "properties": {
+                    "gid": {
+                        "type": "integer"
+                    },
+                    "group": {
+                        "type": "string"
+                    },
+                    "uid": {
+                        "type": "integer"
+                    },
+                    "username": {
+                        "type": "string"
+                    }
+                }
+            },
+            "AppDefImage": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Application": {
+                "type": "object",
+                "properties": {
+                    "command": {
+                        "type": "string"
+                    },
+                    "geometry": {
+                        "type": "string"
+                    },
+                    "ipaddr": {
+                        "type": "string"
+                    },
+                    "nosubmit": {
+                        "type": "boolean",
+                        "description": "If this is set, then the API server just returns the jobobj rather than send it to the scheduler.\nDevelopment mode python API does the same\nThis only applies if JARVICE_API_LOG_ENABLE environment var is set"
+                    },
+                    "parameters": {
+                        "$ref": "#/components/schemas/ModelDict"
+                    },
+                    "walltime": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Container": {
+                "type": "object",
+                "properties": {
+                    "image": {
+                        "type": "string"
+                    },
+                    "interactive": {
+                        "type": "boolean"
+                    },
+                    "jobscript": {
+                        "type": "string"
+                    },
+                    "pullsecret": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ModelDict": {
+                "type": "object"
+            },
+            "HpcEnvs": {
+                "type": "object",
+                "additionalProperties": {
+                    "type": "string"
+                }
+            },
+            "HpcReq": {
+                "type": "object",
+                "properties": {
+                    "hpc_envs": {
+                        "$ref": "#/components/schemas/HpcEnvs"
+                    },
+                    "hpc_job_env_config": {
+                        "type": "string"
+                    },
+                    "hpc_job_script": {
+                        "type": "string"
+                    },
+                    "hpc_job_shell": {
+                        "type": "string"
+                    },
+                    "hpc_queue": {
+                        "type": "string"
+                    },
+                    "hpc_resources": {
+                        "$ref": "#/components/schemas/HpcResources"
+                    },
+                    "hpc_umask": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "HpcResources": {
+                "type": "object",
+                "additionalProperties": {
+                    "type": "string"
+                }
+            },
+            "JobEntry": {
+                "type": "object",
+                "properties": {
+                    "job_address": {
+                        "type": "string"
+                    },
+                    "job_after": {
+                        "type": "string"
+                    },
+                    "job_api_submission": {
+                        "$ref": "#/components/schemas/Submission"
+                    },
+                    "job_app_discount": {
+                        "type": "integer"
+                    },
+                    "job_app_price": {
+                        "type": "number"
+                    },
+                    "job_application": {
+                        "type": "string"
+                    },
+                    "job_billed": {
+                        "type": "boolean"
+                    },
+                    "job_billing_code": {
+                        "type": "integer"
+                    },
+                    "job_command": {
+                        "type": "string"
+                    },
+                    "job_dashboard_visible": {
+                        "type": "integer"
+                    },
+                    "job_end_time": {
+                        "type": "integer"
+                    },
+                    "job_exitcode": {
+                        "type": "integer"
+                    },
+                    "job_label": {
+                        "type": "string"
+                    },
+                    "job_mc_discount": {
+                        "type": "integer"
+                    },
+                    "job_mc_name": {
+                        "type": "string"
+                    },
+                    "job_mc_scale": {
+                        "type": "integer"
+                    },
+                    "job_name": {
+                        "type": "string"
+                    },
+                    "job_nodes": {
+                        "type": "string"
+                    },
+                    "job_number": {
+                        "type": "integer"
+                    },
+                    "job_owner_username": {
+                        "type": "string"
+                    },
+                    "job_payer": {
+                        "type": "string"
+                    },
+                    "job_price": {
+                        "type": "number"
+                    },
+                    "job_sched_id": {
+                        "type": "integer"
+                    },
+                    "job_sched_job_id": {
+                        "type": "string"
+                    },
+                    "job_start_time": {
+                        "type": "integer"
+                    },
+                    "job_stats": {
+                        "$ref": "#/components/schemas/JobStats"
+                    },
+                    "job_status": {
+                        "type": "string"
+                    },
+                    "job_submit_time": {
+                        "type": "integer"
+                    },
+                    "job_substatus": {
+                        "type": "integer"
+                    },
+                    "job_substatus_text": {
+                        "type": "string"
+                    },
+                    "job_walltime": {
+                        "type": "string"
+                    }
+                }
+            },
+            "JobStats": {
+                "type": "object",
+                "properties": {
+                    "app_cost": {
+                        "type": "number"
+                    },
+                    "compute_cost": {
+                        "type": "number"
+                    },
+                    "compute_time": {
+                        "type": "integer"
+                    },
+                    "job_count": {
+                        "type": "integer"
+                    },
+                    "queue_time": {
+                        "type": "integer"
+                    },
+                    "wall_time": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "Jobs": {
+                "type": "object",
+                "additionalProperties": {
+                    "$ref": "#/components/schemas/JobEntry"
+                }
+            },
+            "Machine": {
+                "type": "object",
+                "properties": {
+                    "nodes": {
+                        "type": "integer"
+                    },
+                    "type": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ParDef": {
+                "type": "object",
+                "properties": {
+                    "cmdscript": {
+                        "type": "boolean"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "filter": {
+                        "type": "string"
+                    },
+                    "if": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "ifnot": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "max": {
+                        "type": "string",
+                        "description": "We use Json.Number for max, min and step here because we need"
+                    },
+                    "min": {
+                        "type": "string",
+                        "description": "to detect a missing value"
+                    },
+                    "mvalues": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "positional": {
+                        "type": "boolean"
+                    },
+                    "required": {
+                        "type": "boolean"
+                    },
+                    "size": {
+                        "type": "string"
+                    },
+                    "step": {
+                        "type": "string"
+                    },
+                    "target": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "object"
+                    },
+                    "values": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "variable": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "ParDefs": {
+                "type": "object",
+                "additionalProperties": {
+                    "$ref": "#/components/schemas/ParDef"
+                }
+            },
+            "Queue": {
+                "type": "object",
+                "properties": {
+                    "app": {
+                        "type": "string"
+                    },
+                    "machine": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "size": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "RTMetricsItemized": {
+                "type": "object",
+                "properties": {
+                    "cpu_used": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
+                    },
+                    "memory_total": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
+                    },
+                    "memory_used": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
+                    }
+                }
+            },
+            "RTMetricsSummary": {
+                "type": "object",
+                "properties": {
+                    "cpu_used": {
+                        "type": "integer"
+                    },
+                    "memory_total": {
+                        "type": "integer"
+                    },
+                    "memory_used": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "RuntimeConnect": {
+                "type": "object",
+                "properties": {
+                    "address": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                }
+            },
+            "RuntimeMetrics": {
+                "type": "object",
+                "properties": {
+                    "itemized": {
+                        "$ref": "#/components/schemas/RTMetricsItemized"
+                    },
+                    "summary": {
+                        "$ref": "#/components/schemas/RTMetricsSummary"
+                    }
+                }
+            },
+            "Submission": {
+                "type": "object",
+                "properties": {
+                    "app": {
+                        "type": "string"
+                    },
+                    "application": {
+                        "$ref": "#/components/schemas/Application"
+                    },
+                    "container": {
+                        "$ref": "#/components/schemas/Container"
+                    },
+                    "gen_sshkey": {
+                        "type": "boolean"
+                    },
+                    "hpc": {
+                        "$ref": "#/components/schemas/HpcReq"
+                    },
+                    "identity": {
+                        "$ref": "#/components/schemas/AppDefIdent"
+                    },
+                    "job_label": {
+                        "type": "string"
+                    },
+                    "job_project": {
+                        "type": "string"
+                    },
+                    "jobsub": {
+                        "type": "string"
+                    },
+                    "licenses": {
+                        "type": "string"
+                    },
+                    "machine": {
+                        "$ref": "#/components/schemas/Machine"
+                    },
+                    "nopasssubt": {
+                        "type": "boolean",
+                        "description": "subt is not a typo"
+                    },
+                    "publicIP": {
+                        "type": "boolean"
+                    },
+                    "queue": {
+                        "type": "string"
+                    },
+                    "test_comment": {
+                        "type": "string",
+                        "description": "Remove later"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/SubmitUser"
+                    },
+                    "vault": {
+                        "$ref": "#/components/schemas/Vault"
+                    }
+                }
+            },
+            "SubmitUser": {
+                "type": "object",
+                "properties": {
+                    "apikey": {
+                        "type": "string"
+                    },
+                    "username": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Variable": {
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "inherit": {
+                        "type": "boolean"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "required": {
+                        "type": "boolean"
+                    },
+                    "userowned": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "Variables": {
+                "type": "object",
+                "additionalProperties": {
+                    "$ref": "#/components/schemas/Variable"
+                }
+            },
+            "Vault": {
+                "type": "object",
+                "properties": {
+                    "bucket": {
+                        "type": "string"
+                    },
+                    "confirm": {
+                        "type": "string"
+                    },
+                    "domain": {
+                        "type": "string"
+                    },
+                    "force": {
+                        "type": "boolean"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "objects": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "readonly": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "sched.JobStatusEntry": {
+                "type": "object",
+                "properties": {
+                    "job_application": {
+                        "type": "string"
+                    },
+                    "job_command": {
+                        "type": "string"
+                    },
+                    "job_end_time": {
+                        "type": "integer"
+                    },
+                    "job_name": {
+                        "type": "string"
+                    },
+                    "job_project": {
+                        "type": "string"
+                    },
+                    "job_start_time": {
+                        "type": "integer"
+                    },
+                    "job_status": {
+                        "type": "string"
+                    },
+                    "job_submit_time": {
+                        "type": "integer"
+                    },
+                    "job_substatus": {
+                        "type": "integer"
+                    },
+                    "job_walltime": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

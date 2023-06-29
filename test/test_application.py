@@ -16,9 +16,9 @@
 import unittest
 import datetime
 
-import openapi_client
-from openapi_client.models.application import Application  # noqa: E501
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.application import Application  # noqa: E501
+from jarviceapi_client.rest import ApiException
 
 class TestApplication(unittest.TestCase):
     """Application unit test stubs"""
@@ -36,14 +36,14 @@ class TestApplication(unittest.TestCase):
             optional params are included """
         # uncomment below to create an instance of `Application`
         """
-        model = openapi_client.models.application.Application()  # noqa: E501
+        model = jarviceapi_client.models.application.Application()  # noqa: E501
         if include_optional :
             return Application(
                 command = '', 
                 geometry = '', 
                 ipaddr = '', 
                 nosubmit = True, 
-                parameters = openapi_client.models.model_dict.ModelDict(), 
+                parameters = jarviceapi_client.models.model_dict.ModelDict(), 
                 walltime = ''
             )
         else :

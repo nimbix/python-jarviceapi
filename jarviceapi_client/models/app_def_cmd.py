@@ -21,8 +21,8 @@ import json
 
 from typing import Dict, List, Optional
 from pydantic import BaseModel, StrictBool, StrictInt, StrictStr, conlist
-from openapi_client.models.par_def import ParDef
-from openapi_client.models.variable import Variable
+from jarviceapi_client.models.par_def import ParDef
+from jarviceapi_client.models.variable import Variable
 
 class AppDefCmd(BaseModel):
     """

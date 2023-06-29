@@ -25,11 +25,11 @@ import tempfile
 
 from urllib.parse import quote
 
-from openapi_client.configuration import Configuration
-from openapi_client.api_response import ApiResponse
-import openapi_client.models
-from openapi_client import rest
-from openapi_client.exceptions import ApiValueError, ApiException
+from jarviceapi_client.configuration import Configuration
+from jarviceapi_client.api_response import ApiResponse
+import jarviceapi_client.models
+from jarviceapi_client import rest
+from jarviceapi_client.exceptions import ApiValueError, ApiException
 
 
 class ApiClient(object):
@@ -342,7 +342,7 @@ class ApiClient(object):
             if klass in self.NATIVE_TYPES_MAPPING:
                 klass = self.NATIVE_TYPES_MAPPING[klass]
             else:
-                klass = getattr(openapi_client.models, klass)
+                klass = getattr(jarviceapi_client.models, klass)
 
         if klass in self.PRIMITIVE_TYPES:
             return self.__deserialize_primitive(data, klass)

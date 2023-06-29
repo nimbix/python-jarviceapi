@@ -16,9 +16,9 @@
 import unittest
 import datetime
 
-import openapi_client
-from openapi_client.models.vault import Vault  # noqa: E501
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.vault import Vault  # noqa: E501
+from jarviceapi_client.rest import ApiException
 
 class TestVault(unittest.TestCase):
     """Vault unit test stubs"""
@@ -36,7 +36,7 @@ class TestVault(unittest.TestCase):
             optional params are included """
         # uncomment below to create an instance of `Vault`
         """
-        model = openapi_client.models.vault.Vault()  # noqa: E501
+        model = jarviceapi_client.models.vault.Vault()  # noqa: E501
         if include_optional :
             return Vault(
                 bucket = '', 

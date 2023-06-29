@@ -21,13 +21,13 @@ import json
 
 from typing import Optional
 from pydantic import BaseModel, Field, StrictBool, StrictStr
-from openapi_client.models.app_def_ident import AppDefIdent
-from openapi_client.models.application import Application
-from openapi_client.models.container import Container
-from openapi_client.models.hpc_req import HpcReq
-from openapi_client.models.machine import Machine
-from openapi_client.models.submit_user import SubmitUser
-from openapi_client.models.vault import Vault
+from jarviceapi_client.models.app_def_ident import AppDefIdent
+from jarviceapi_client.models.application import Application
+from jarviceapi_client.models.container import Container
+from jarviceapi_client.models.hpc_req import HpcReq
+from jarviceapi_client.models.machine import Machine
+from jarviceapi_client.models.submit_user import SubmitUser
+from jarviceapi_client.models.vault import Vault
 
 class Submission(BaseModel):
     """

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.machine import Machine
+from jarviceapi_client.models.machine import Machine
 
 # TODO update the JSON string below
 json = "{}"

@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.sched_job_status_entry import SchedJobStatusEntry
+from jarviceapi_client.models.sched_job_status_entry import SchedJobStatusEntry
 
 # TODO update the JSON string below
 json = "{}"

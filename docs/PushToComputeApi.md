@@ -1,4 +1,4 @@
-# openapi_client.PushToComputeApi
+# jarviceapi_client.PushToComputeApi
 
 All URIs are relative to *http://localhost*
 
@@ -22,21 +22,21 @@ Builds a JARVICE application image for a Docker repository. The JARVICE applicat
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.PushToComputeApi(api_client)
+    api_instance = jarviceapi_client.PushToComputeApi(api_client)
     apikey = 'apikey_example' # str | API key for user to authenticate 
     username = 'username_example' # str | Name of user to authenticate
     target = 'target_example' # str | Target application ID to build an image for (must exist)
@@ -97,21 +97,21 @@ Retrieve build/pull history for a JARVICE application image. On success, the req
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.PushToComputeApi(api_client)
+    api_instance = jarviceapi_client.PushToComputeApi(api_client)
     apikey = 'apikey_example' # str | API key for user to authenticate 
     username = 'username_example' # str | Name of user to authenticate
     target = 'target_example' # str | Target image name to get history for (usually same as the application ID)
@@ -172,21 +172,21 @@ Pulls a Docker repository into a JARVICE application image. The JARVICE applicat
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.PushToComputeApi(api_client)
+    api_instance = jarviceapi_client.PushToComputeApi(api_client)
     apikey = 'apikey_example' # str | API key for user to authenticate 
     username = 'username_example' # str | Name of user to authenticate
     repo = 'repo_example' # str | Docker repository to pull from
@@ -246,23 +246,23 @@ Validates an AppDef (application definition). A valid AppDef can be used to cust
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.models.app_def import AppDef
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.app_def import AppDef
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.PushToComputeApi(api_client)
-    var_json = openapi_client.AppDef() # AppDef | JSON payload containing an AppDef (application definition) to validate. Please see the Application Definition Guide for details on the format. A valid AppDef can be used to customize the user interface endpoints for an application, as well as descriptive metadata.
+    api_instance = jarviceapi_client.PushToComputeApi(api_client)
+    var_json = jarviceapi_client.AppDef() # AppDef | JSON payload containing an AppDef (application definition) to validate. Please see the Application Definition Guide for details on the format. A valid AppDef can be used to customize the user interface endpoints for an application, as well as descriptive metadata.
 
     try:
         # Validates an AppDef (application definition).

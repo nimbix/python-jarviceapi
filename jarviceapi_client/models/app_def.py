@@ -21,10 +21,10 @@ import json
 
 from typing import Dict, List, Optional
 from pydantic import BaseModel, Field, StrictBool, StrictInt, StrictStr, conlist
-from openapi_client.models.app_def_cmd import AppDefCmd
-from openapi_client.models.app_def_ident import AppDefIdent
-from openapi_client.models.app_def_image import AppDefImage
-from openapi_client.models.variable import Variable
+from jarviceapi_client.models.app_def_cmd import AppDefCmd
+from jarviceapi_client.models.app_def_ident import AppDefIdent
+from jarviceapi_client.models.app_def_image import AppDefImage
+from jarviceapi_client.models.variable import Variable
 
 class AppDef(BaseModel):
     """

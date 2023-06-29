@@ -16,9 +16,9 @@
 import unittest
 import datetime
 
-import openapi_client
-from openapi_client.models.rt_metrics_summary import RTMetricsSummary  # noqa: E501
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.rt_metrics_summary import RTMetricsSummary  # noqa: E501
+from jarviceapi_client.rest import ApiException
 
 class TestRTMetricsSummary(unittest.TestCase):
     """RTMetricsSummary unit test stubs"""
@@ -36,7 +36,7 @@ class TestRTMetricsSummary(unittest.TestCase):
             optional params are included """
         # uncomment below to create an instance of `RTMetricsSummary`
         """
-        model = openapi_client.models.rt_metrics_summary.RTMetricsSummary()  # noqa: E501
+        model = jarviceapi_client.models.rt_metrics_summary.RTMetricsSummary()  # noqa: E501
         if include_optional :
             return RTMetricsSummary(
                 cpu_used = 56, 

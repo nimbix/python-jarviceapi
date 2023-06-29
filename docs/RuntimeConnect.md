@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.runtime_connect import RuntimeConnect
+from jarviceapi_client.models.runtime_connect import RuntimeConnect
 
 # TODO update the JSON string below
 json = "{}"

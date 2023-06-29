@@ -24,17 +24,17 @@ from pydantic import Field, StrictBool, StrictInt, StrictStr
 
 from typing import Any, Dict, List, Optional, Union
 
-from openapi_client.models.app_def import AppDef
-from openapi_client.models.job_entry import JobEntry
-from openapi_client.models.queue import Queue
-from openapi_client.models.runtime_connect import RuntimeConnect
-from openapi_client.models.runtime_metrics import RuntimeMetrics
-from openapi_client.models.sched_job_status_entry import SchedJobStatusEntry
-from openapi_client.models.team_user import TeamUser
+from jarviceapi_client.models.app_def import AppDef
+from jarviceapi_client.models.job_entry import JobEntry
+from jarviceapi_client.models.queue import Queue
+from jarviceapi_client.models.runtime_connect import RuntimeConnect
+from jarviceapi_client.models.runtime_metrics import RuntimeMetrics
+from jarviceapi_client.models.sched_job_status_entry import SchedJobStatusEntry
+from jarviceapi_client.models.team_user import TeamUser
 
-from openapi_client.api_client import ApiClient
-from openapi_client.api_response import ApiResponse
-from openapi_client.exceptions import (  # noqa: F401
+from jarviceapi_client.api_client import ApiClient
+from jarviceapi_client.api_response import ApiResponse
+from jarviceapi_client.exceptions import (  # noqa: F401
     ApiTypeError,
     ApiValueError
 )

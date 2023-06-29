@@ -16,9 +16,9 @@
 import unittest
 import datetime
 
-import openapi_client
-from openapi_client.models.job_obj_vault import JobObjVault  # noqa: E501
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.job_obj_vault import JobObjVault  # noqa: E501
+from jarviceapi_client.rest import ApiException
 
 class TestJobObjVault(unittest.TestCase):
     """JobObjVault unit test stubs"""
@@ -36,13 +36,13 @@ class TestJobObjVault(unittest.TestCase):
             optional params are included """
         # uncomment below to create an instance of `JobObjVault`
         """
-        model = openapi_client.models.job_obj_vault.JobObjVault()  # noqa: E501
+        model = jarviceapi_client.models.job_obj_vault.JobObjVault()  # noqa: E501
         if include_optional :
             return JobObjVault(
                 auth = '', 
                 domain = '', 
                 force = True, 
-                var_global = openapi_client.models.model_dict.ModelDict(), 
+                var_global = jarviceapi_client.models.model_dict.ModelDict(), 
                 name = '', 
                 ro = True
             )

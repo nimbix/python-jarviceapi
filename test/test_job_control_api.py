@@ -15,16 +15,16 @@
 
 import unittest
 
-import openapi_client
-from openapi_client.api.job_control_api import JobControlApi  # noqa: E501
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.api.job_control_api import JobControlApi  # noqa: E501
+from jarviceapi_client.rest import ApiException
 
 
 class TestJobControlApi(unittest.TestCase):
     """JobControlApi unit test stubs"""
 
     def setUp(self):
-        self.api = openapi_client.api.job_control_api.JobControlApi()  # noqa: E501
+        self.api = jarviceapi_client.api.job_control_api.JobControlApi()  # noqa: E501
 
     def tearDown(self):
         pass

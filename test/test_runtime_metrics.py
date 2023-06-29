@@ -16,9 +16,9 @@
 import unittest
 import datetime
 
-import openapi_client
-from openapi_client.models.runtime_metrics import RuntimeMetrics  # noqa: E501
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.runtime_metrics import RuntimeMetrics  # noqa: E501
+from jarviceapi_client.rest import ApiException
 
 class TestRuntimeMetrics(unittest.TestCase):
     """RuntimeMetrics unit test stubs"""
@@ -36,10 +36,10 @@ class TestRuntimeMetrics(unittest.TestCase):
             optional params are included """
         # uncomment below to create an instance of `RuntimeMetrics`
         """
-        model = openapi_client.models.runtime_metrics.RuntimeMetrics()  # noqa: E501
+        model = jarviceapi_client.models.runtime_metrics.RuntimeMetrics()  # noqa: E501
         if include_optional :
             return RuntimeMetrics(
-                itemized = openapi_client.models.rt_metrics_itemized.RTMetricsItemized(
+                itemized = jarviceapi_client.models.rt_metrics_itemized.RTMetricsItemized(
                     cpu_used = [
                         56
                         ], 
@@ -49,7 +49,7 @@ class TestRuntimeMetrics(unittest.TestCase):
                     memory_used = [
                         56
                         ], ), 
-                summary = openapi_client.models.rt_metrics_summary.RTMetricsSummary(
+                summary = jarviceapi_client.models.rt_metrics_summary.RTMetricsSummary(
                     cpu_used = 56, 
                     memory_total = 56, 
                     memory_used = 56, )

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.app_def_image import AppDefImage
+from jarviceapi_client.models.app_def_image import AppDefImage
 
 # TODO update the JSON string below
 json = "{}"

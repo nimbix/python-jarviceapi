@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.runtime_metrics import RuntimeMetrics
+from jarviceapi_client.models.runtime_metrics import RuntimeMetrics
 
 # TODO update the JSON string below
 json = "{}"

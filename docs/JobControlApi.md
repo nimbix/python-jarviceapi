@@ -1,4 +1,4 @@
-# openapi_client.JobControlApi
+# jarviceapi_client.JobControlApi
 
 All URIs are relative to *http://localhost*
 
@@ -24,21 +24,21 @@ Executes an application-defined command inside a running job. The command runs a
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.JobControlApi(api_client)
+    api_instance = jarviceapi_client.JobControlApi(api_client)
     apikey = 'apikey_example' # str | API key for user to authenticate
     username = 'username_example' # str | Name of user to authenticate
     action = 'action_example' # str | The name of the action to run (must be a valid action from /jarvice/info)
@@ -100,23 +100,23 @@ Submits a job for processing. The body is in JSON format similar to /jarvice/sub
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.models.submission import Submission
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.submission import Submission
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.JobControlApi(api_client)
-    var_json = openapi_client.Submission() # Submission | JSON payload to run the compute job, generated as specified above. If copying from the web portal, paste the text into a file or script to use as the JSON payload to submit. Please note that authentication is performed from the username and apikey values in the JSON itself.
+    api_instance = jarviceapi_client.JobControlApi(api_client)
+    var_json = jarviceapi_client.Submission() # Submission | JSON payload to run the compute job, generated as specified above. If copying from the web portal, paste the text into a file or script to use as the JSON payload to submit. Please note that authentication is performed from the username and apikey values in the JSON itself.
 
     try:
         # Submits a job for processing.
@@ -172,21 +172,21 @@ Requests a graceful termination of a job, executing the operating system powerof
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.JobControlApi(api_client)
+    api_instance = jarviceapi_client.JobControlApi(api_client)
     apikey = 'apikey_example' # str | API key for user to authenticate
     username = 'username_example' # str | Name of user to authenticate
     name = 'name_example' # str | Job name (name key returned from /jarvice/submit *Must be specifed or number is specified (optional)
@@ -246,21 +246,21 @@ Send a signal to a running job (e.g. SIGTSTP/20). On success: {\"signal\": <sign
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.JobControlApi(api_client)
+    api_instance = jarviceapi_client.JobControlApi(api_client)
     apikey = 'apikey_example' # str | API key for user to authenticate
     username = 'username_example' # str | Name of user to authenticate
     name = 'name_example' # str | Job name (name key returned from /jarvice/submit *Must be specifed or number is specified (optional)
@@ -322,23 +322,23 @@ Submits a job for processing. The body is in JSON format and can be generated fr
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.models.job_obj import JobObj
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.job_obj import JobObj
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.JobControlApi(api_client)
-    var_json = openapi_client.JobObj() # JobObj | JSON payload to run the compute job, generated as specified above. If copying from the web portal, paste the text into a file or script to use as the JSON payload to submit. Please note that authentication is performed from the username and apikey values in the JSON itself.
+    api_instance = jarviceapi_client.JobControlApi(api_client)
+    var_json = jarviceapi_client.JobObj() # JobObj | JSON payload to run the compute job, generated as specified above. If copying from the web portal, paste the text into a file or script to use as the JSON payload to submit. Please note that authentication is performed from the username and apikey values in the JSON itself.
 
     try:
         # Submits a job for processing.
@@ -394,21 +394,21 @@ Immediately terminates a running job. NB: This will terminate the job regardless
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = jarviceapi_client.Configuration(
     host = "http://localhost"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.JobControlApi(api_client)
+    api_instance = jarviceapi_client.JobControlApi(api_client)
     apikey = 'apikey_example' # str | API key for user to authenticate
     username = 'username_example' # str | Name of user to authenticate
     name = 'name_example' # str | Job name (name key returned from /jarvice/submit *Must be specifed or number is specified (optional)

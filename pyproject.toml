@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "openapi_client"
+name = "jarviceapi_client"
 version = "1.0.0"
 description = "Jarvice API"
 authors = ["Nimbix <support@nimbix.net>"]

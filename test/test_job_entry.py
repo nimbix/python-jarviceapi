@@ -16,9 +16,9 @@
 import unittest
 import datetime
 
-import openapi_client
-from openapi_client.models.job_entry import JobEntry  # noqa: E501
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.job_entry import JobEntry  # noqa: E501
+from jarviceapi_client.rest import ApiException
 
 class TestJobEntry(unittest.TestCase):
     """JobEntry unit test stubs"""
@@ -36,27 +36,27 @@ class TestJobEntry(unittest.TestCase):
             optional params are included """
         # uncomment below to create an instance of `JobEntry`
         """
-        model = openapi_client.models.job_entry.JobEntry()  # noqa: E501
+        model = jarviceapi_client.models.job_entry.JobEntry()  # noqa: E501
         if include_optional :
             return JobEntry(
                 job_address = '', 
                 job_after = '', 
-                job_api_submission = openapi_client.models.submission.Submission(
+                job_api_submission = jarviceapi_client.models.submission.Submission(
                     app = '', 
-                    application = openapi_client.models.application.Application(
+                    application = jarviceapi_client.models.application.Application(
                         command = '', 
                         geometry = '', 
                         ipaddr = '', 
                         nosubmit = True, 
-                        parameters = openapi_client.models.model_dict.ModelDict(), 
+                        parameters = jarviceapi_client.models.model_dict.ModelDict(), 
                         walltime = '', ), 
-                    container = openapi_client.models.container.Container(
+                    container = jarviceapi_client.models.container.Container(
                         image = '', 
                         interactive = True, 
                         jobscript = '', 
                         pullsecret = '', ), 
                     gen_sshkey = True, 
-                    hpc = openapi_client.models.hpc_req.HpcReq(
+                    hpc = jarviceapi_client.models.hpc_req.HpcReq(
                         hpc_envs = {
                             'key' : ''
                             }, 
@@ -68,7 +68,7 @@ class TestJobEntry(unittest.TestCase):
                             'key' : ''
                             }, 
                         hpc_umask = 56, ), 
-                    identity = openapi_client.models.app_def_ident.AppDefIdent(
+                    identity = jarviceapi_client.models.app_def_ident.AppDefIdent(
                         gid = 56, 
                         group = '', 
                         uid = 56, 
@@ -77,17 +77,17 @@ class TestJobEntry(unittest.TestCase):
                     job_project = '', 
                     jobsub = '', 
                     licenses = '', 
-                    machine = openapi_client.models.machine.Machine(
+                    machine = jarviceapi_client.models.machine.Machine(
                         nodes = 56, 
                         type = '', ), 
                     nopasssubt = True, 
                     public_ip = True, 
                     queue = '', 
                     test_comment = '', 
-                    user = openapi_client.models.submit_user.SubmitUser(
+                    user = jarviceapi_client.models.submit_user.SubmitUser(
                         apikey = '', 
                         username = '', ), 
-                    vault = openapi_client.models.vault.Vault(
+                    vault = jarviceapi_client.models.vault.Vault(
                         bucket = '', 
                         confirm = '', 
                         domain = '', 
@@ -120,7 +120,7 @@ class TestJobEntry(unittest.TestCase):
                 job_sched_id = 56, 
                 job_sched_job_id = '', 
                 job_start_time = 56, 
-                job_stats = openapi_client.models.job_stats.JobStats(
+                job_stats = jarviceapi_client.models.job_stats.JobStats(
                     app_cost = 1.337, 
                     compute_cost = 1.337, 
                     compute_time = 56, 

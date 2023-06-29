@@ -21,8 +21,8 @@ import json
 
 from typing import Optional, Union
 from pydantic import BaseModel, StrictBool, StrictFloat, StrictInt, StrictStr
-from openapi_client.models.job_stats import JobStats
-from openapi_client.models.submission import Submission
+from jarviceapi_client.models.job_stats import JobStats
+from jarviceapi_client.models.submission import Submission
 
 class JobEntry(BaseModel):
     """

@@ -15,16 +15,16 @@
 
 import unittest
 
-import openapi_client
-from openapi_client.api.push_to_compute_api import PushToComputeApi  # noqa: E501
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.api.push_to_compute_api import PushToComputeApi  # noqa: E501
+from jarviceapi_client.rest import ApiException
 
 
 class TestPushToComputeApi(unittest.TestCase):
     """PushToComputeApi unit test stubs"""
 
     def setUp(self):
-        self.api = openapi_client.api.push_to_compute_api.PushToComputeApi()  # noqa: E501
+        self.api = jarviceapi_client.api.push_to_compute_api.PushToComputeApi()  # noqa: E501
 
     def tearDown(self):
         pass

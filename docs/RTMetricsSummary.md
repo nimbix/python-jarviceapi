@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.rt_metrics_summary import RTMetricsSummary
+from jarviceapi_client.models.rt_metrics_summary import RTMetricsSummary
 
 # TODO update the JSON string below
 json = "{}"

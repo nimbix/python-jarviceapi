@@ -27,7 +27,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.app_def_cmd import AppDefCmd
+from jarviceapi_client.models.app_def_cmd import AppDefCmd
 
 # TODO update the JSON string below
 json = "{}"

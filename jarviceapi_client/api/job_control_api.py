@@ -24,12 +24,12 @@ from pydantic import Field, StrictInt, StrictStr
 
 from typing import Any, Dict, Optional
 
-from openapi_client.models.job_obj import JobObj
-from openapi_client.models.submission import Submission
+from jarviceapi_client.models.job_obj import JobObj
+from jarviceapi_client.models.submission import Submission
 
-from openapi_client.api_client import ApiClient
-from openapi_client.api_response import ApiResponse
-from openapi_client.exceptions import (  # noqa: F401
+from jarviceapi_client.api_client import ApiClient
+from jarviceapi_client.api_response import ApiResponse
+from jarviceapi_client.exceptions import (  # noqa: F401
     ApiTypeError,
     ApiValueError
 )

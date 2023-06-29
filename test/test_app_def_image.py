@@ -16,9 +16,9 @@
 import unittest
 import datetime
 
-import openapi_client
-from openapi_client.models.app_def_image import AppDefImage  # noqa: E501
-from openapi_client.rest import ApiException
+import jarviceapi_client
+from jarviceapi_client.models.app_def_image import AppDefImage  # noqa: E501
+from jarviceapi_client.rest import ApiException
 
 class TestAppDefImage(unittest.TestCase):
     """AppDefImage unit test stubs"""
@@ -36,7 +36,7 @@ class TestAppDefImage(unittest.TestCase):
             optional params are included """
         # uncomment below to create an instance of `AppDefImage`
         """
-        model = openapi_client.models.app_def_image.AppDefImage()  # noqa: E501
+        model = jarviceapi_client.models.app_def_image.AppDefImage()  # noqa: E501
         if include_optional :
             return AppDefImage(
                 data = '', 

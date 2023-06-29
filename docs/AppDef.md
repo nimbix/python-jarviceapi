@@ -30,7 +30,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.app_def import AppDef
+from jarviceapi_client.models.app_def import AppDef
 
 # TODO update the JSON string below
 json = "{}"
