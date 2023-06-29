@@ -55,10 +55,10 @@ import jarviceapi_client
 from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://<jarvice-xe-endpoint>/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = jarviceapi_client.Configuration(
-    host = "http://localhost"
+    host = "http://<jarvice-xe-endpoint>/api"
 )
 
 
