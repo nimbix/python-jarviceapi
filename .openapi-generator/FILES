@@ -20,6 +20,7 @@ docs/Queue.md
 docs/RTMetricsItemized.md
 docs/RTMetricsSummary.md
 docs/RuntimeConnect.md
+docs/RuntimeInfo.md
 docs/RuntimeMetrics.md
 docs/SchedJobStatusEntry.md
 docs/StatusAndInformationApi.md
@@ -54,6 +55,7 @@ jarviceapi_client/models/queue.py
 jarviceapi_client/models/rt_metrics_itemized.py
 jarviceapi_client/models/rt_metrics_summary.py
 jarviceapi_client/models/runtime_connect.py
+jarviceapi_client/models/runtime_info.py
 jarviceapi_client/models/runtime_metrics.py
 jarviceapi_client/models/sched_job_status_entry.py
 jarviceapi_client/models/submission.py
@@ -68,4 +70,5 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_runtime_info.py
 tox.ini

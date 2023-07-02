@@ -28,6 +28,7 @@ from jarviceapi_client.models.app_def import AppDef
 from jarviceapi_client.models.job_entry import JobEntry
 from jarviceapi_client.models.queue import Queue
 from jarviceapi_client.models.runtime_connect import RuntimeConnect
+from jarviceapi_client.models.runtime_info import RuntimeInfo
 from jarviceapi_client.models.runtime_metrics import RuntimeMetrics
 from jarviceapi_client.models.sched_job_status_entry import SchedJobStatusEntry
 from jarviceapi_client.models.team_user import TeamUser
@@ -936,7 +937,7 @@ class StatusAndInformationApi(object):
             _request_auth=_params.get('_request_auth'))
 
     @validate_arguments
-    def info_get(self, apikey : Annotated[StrictStr, Field(..., description="API key for user to authenticate")], username : Annotated[StrictStr, Field(..., description="Name of user to authenticate")], name : Annotated[Optional[StrictStr], Field(description="Job name (name key returned from /jarvice/submit *Must be specifed or number is specified")] = None, number : Annotated[Optional[StrictInt], Field(description="Job number (number key returned from /jarvice/submit) *Must be specifed or name is specified")] = None, **kwargs) -> SchedJobStatusEntry:  # noqa: E501
+    def info_get(self, apikey : Annotated[StrictStr, Field(..., description="API key for user to authenticate")], username : Annotated[StrictStr, Field(..., description="Name of user to authenticate")], name : Annotated[Optional[StrictStr], Field(description="Job name (name key returned from /jarvice/submit *Must be specifed or number is specified")] = None, number : Annotated[Optional[StrictInt], Field(description="Job number (number key returned from /jarvice/submit) *Must be specifed or name is specified")] = None, **kwargs) -> RuntimeInfo:  # noqa: E501
         """Get info from job  # noqa: E501
 
         Get info from job  # noqa: E501
@@ -963,7 +964,7 @@ class StatusAndInformationApi(object):
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: SchedJobStatusEntry
+        :rtype: RuntimeInfo
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -1011,7 +1012,7 @@ class StatusAndInformationApi(object):
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(SchedJobStatusEntry, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(RuntimeInfo, status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -1078,7 +1079,7 @@ class StatusAndInformationApi(object):
         _auth_settings = []  # noqa: E501
 
         _response_types_map = {
-            '200': "SchedJobStatusEntry",
+            '200': "RuntimeInfo",
             '400': "str",
             '401': None,
             '404': None,

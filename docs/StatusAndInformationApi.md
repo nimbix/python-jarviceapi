@@ -412,7 +412,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **info_get**
-> SchedJobStatusEntry info_get(apikey, username, name=name, number=number)
+> RuntimeInfo info_get(apikey, username, name=name, number=number)
 
 Get info from job
 
@@ -424,7 +424,7 @@ Get info from job
 import time
 import os
 import jarviceapi_client
-from jarviceapi_client.models.sched_job_status_entry import SchedJobStatusEntry
+from jarviceapi_client.models.runtime_info import RuntimeInfo
 from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
@@ -465,7 +465,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SchedJobStatusEntry**](SchedJobStatusEntry.md)
+[**RuntimeInfo**](RuntimeInfo.md)
 
 ### Authorization
 

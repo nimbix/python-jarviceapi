@@ -826,7 +826,7 @@
                         "content": {
                             "*/*": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/sched.JobStatusEntry"
+                                    "$ref": "#/components/schemas/RuntimeInfo"
                                 }
                             }
                         }
@@ -3090,6 +3090,41 @@
                     "job_walltime": {
                         "type": "string"
                     }
+                }
+            },
+            "RuntimeInfo": {
+                "type": "object",
+                "properties": {
+                  "about": {
+                    "type": "string"
+                  },
+                  "actions": {
+                    "$ref": "#/components/schemas/RTInfoActions"
+                  },
+                  "address": {
+                    "type": "string"
+                  },
+                  "help": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  }
+                }
+            },
+            "RTInfoAction": {
+                "type": "object",
+                "additionalProperties": {
+                "type": "string"
+                }
+            },
+            "RTInfoActions": {
+                "type": "object",
+                "additionalProperties": {
+                "$ref": "#/components/schemas/RTInfoAction"
                 }
             }
         }
