@@ -24,7 +24,6 @@ from pydantic import Field, StrictInt, StrictStr
 
 from typing import Any, Dict, Optional
 
-from jarviceapi_client.models.job_obj import JobObj
 from jarviceapi_client.models.submission import Submission
 
 from jarviceapi_client.api_client import ApiClient
@@ -716,7 +715,7 @@ class JobControlApi(object):
             _request_auth=_params.get('_request_auth'))
 
     @validate_arguments
-    def submit_post(self, var_json : Annotated[JobObj, Field(..., description="JSON payload to run the compute job, generated as specified above. If copying from the web portal, paste the text into a file or script to use as the JSON payload to submit. Please note that authentication is performed from the username and apikey values in the JSON itself.")], **kwargs) -> Dict[str, object]:  # noqa: E501
+    def submit_post(self, var_json : Annotated[Submission, Field(..., description="JSON payload to run the compute job, generated as specified above. If copying from the web portal, paste the text into a file or script to use as the JSON payload to submit. Please note that authentication is performed from the username and apikey values in the JSON itself.")], **kwargs) -> Dict[str, object]:  # noqa: E501
         """Submits a job for processing.  # noqa: E501
 
         Submits a job for processing. The body is in JSON format and can be generated from the JARVICE web portal by clicking the PREVIEW SUBMISSION tab in the task builder and copying its contents to the clipboard. Click the copy icon above the SUBMIT button to copy the contents of the API call to the clipboard. NOTE: Adding the identity object in the submission json will replace the NIMBIX Application Environment nimbix user. The JARVICE API cannot override an identity set by an AppDef file. On success, a JSON payload indicating the job name and job number (with name and number keys). Additional Notes: 1. All boolean values default to false if not specified 2. The nodes parameter in the machine section defaults to 1 if not specified 3. Even if a vault section is specified, password is optional and should only be supplied for encrypted block vaults 4. Even if vault section is specified, vault objects is optional and applies only to object storage vaults; it indicates which objects should be moved into the environments's backing store for processing. If readonly is set to false, JARVICE automatically copies any new or changed objects from the backing store back to the object storage on normal job completion (but not immediate termination with /jarvice/terminate). 5. ipaddr will be validated by the underlying platform for authorization for the user; it may also fail if the address is already assigned (but this won't be known until the job starts running).  # noqa: E501
@@ -727,7 +726,7 @@ class JobControlApi(object):
         >>> result = thread.get()
 
         :param var_json: JSON payload to run the compute job, generated as specified above. If copying from the web portal, paste the text into a file or script to use as the JSON payload to submit. Please note that authentication is performed from the username and apikey values in the JSON itself. (required)
-        :type var_json: JobObj
+        :type var_json: Submission
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: timeout setting for this request. If one
@@ -745,7 +744,7 @@ class JobControlApi(object):
         return self.submit_post_with_http_info(var_json, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def submit_post_with_http_info(self, var_json : Annotated[JobObj, Field(..., description="JSON payload to run the compute job, generated as specified above. If copying from the web portal, paste the text into a file or script to use as the JSON payload to submit. Please note that authentication is performed from the username and apikey values in the JSON itself.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def submit_post_with_http_info(self, var_json : Annotated[Submission, Field(..., description="JSON payload to run the compute job, generated as specified above. If copying from the web portal, paste the text into a file or script to use as the JSON payload to submit. Please note that authentication is performed from the username and apikey values in the JSON itself.")], **kwargs) -> ApiResponse:  # noqa: E501
         """Submits a job for processing.  # noqa: E501
 
         Submits a job for processing. The body is in JSON format and can be generated from the JARVICE web portal by clicking the PREVIEW SUBMISSION tab in the task builder and copying its contents to the clipboard. Click the copy icon above the SUBMIT button to copy the contents of the API call to the clipboard. NOTE: Adding the identity object in the submission json will replace the NIMBIX Application Environment nimbix user. The JARVICE API cannot override an identity set by an AppDef file. On success, a JSON payload indicating the job name and job number (with name and number keys). Additional Notes: 1. All boolean values default to false if not specified 2. The nodes parameter in the machine section defaults to 1 if not specified 3. Even if a vault section is specified, password is optional and should only be supplied for encrypted block vaults 4. Even if vault section is specified, vault objects is optional and applies only to object storage vaults; it indicates which objects should be moved into the environments's backing store for processing. If readonly is set to false, JARVICE automatically copies any new or changed objects from the backing store back to the object storage on normal job completion (but not immediate termination with /jarvice/terminate). 5. ipaddr will be validated by the underlying platform for authorization for the user; it may also fail if the address is already assigned (but this won't be known until the job starts running).  # noqa: E501
@@ -756,7 +755,7 @@ class JobControlApi(object):
         >>> result = thread.get()
 
         :param var_json: JSON payload to run the compute job, generated as specified above. If copying from the web portal, paste the text into a file or script to use as the JSON payload to submit. Please note that authentication is performed from the username and apikey values in the JSON itself. (required)
-        :type var_json: JobObj
+        :type var_json: Submission
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will

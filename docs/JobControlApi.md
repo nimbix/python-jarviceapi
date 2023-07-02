@@ -323,7 +323,7 @@ Submits a job for processing. The body is in JSON format and can be generated fr
 import time
 import os
 import jarviceapi_client
-from jarviceapi_client.models.job_obj import JobObj
+from jarviceapi_client.models.submission import Submission
 from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
@@ -338,7 +338,7 @@ configuration = jarviceapi_client.Configuration(
 with jarviceapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = jarviceapi_client.JobControlApi(api_client)
-    var_json = jarviceapi_client.JobObj() # JobObj | JSON payload to run the compute job, generated as specified above. If copying from the web portal, paste the text into a file or script to use as the JSON payload to submit. Please note that authentication is performed from the username and apikey values in the JSON itself.
+    var_json = jarviceapi_client.Submission() # Submission | JSON payload to run the compute job, generated as specified above. If copying from the web portal, paste the text into a file or script to use as the JSON payload to submit. Please note that authentication is performed from the username and apikey values in the JSON itself.
 
     try:
         # Submits a job for processing.
@@ -354,7 +354,7 @@ with jarviceapi_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **var_json** | [**JobObj**](JobObj.md)| JSON payload to run the compute job, generated as specified above. If copying from the web portal, paste the text into a file or script to use as the JSON payload to submit. Please note that authentication is performed from the username and apikey values in the JSON itself. | 
+ **var_json** | [**Submission**](Submission.md)| JSON payload to run the compute job, generated as specified above. If copying from the web portal, paste the text into a file or script to use as the JSON payload to submit. Please note that authentication is performed from the username and apikey values in the JSON itself. | 
 
 ### Return type
 

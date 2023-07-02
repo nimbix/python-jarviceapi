@@ -23,10 +23,7 @@ from jarviceapi_client.models.application import Application
 from jarviceapi_client.models.container import Container
 from jarviceapi_client.models.hpc_req import HpcReq
 from jarviceapi_client.models.job_entry import JobEntry
-from jarviceapi_client.models.job_obj import JobObj
-from jarviceapi_client.models.job_obj_vault import JobObjVault
 from jarviceapi_client.models.job_stats import JobStats
-from jarviceapi_client.models.job_upload import JobUpload
 from jarviceapi_client.models.machine import Machine
 from jarviceapi_client.models.par_def import ParDef
 from jarviceapi_client.models.queue import Queue

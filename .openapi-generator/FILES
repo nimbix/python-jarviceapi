@@ -12,10 +12,7 @@ docs/Container.md
 docs/HpcReq.md
 docs/JobControlApi.md
 docs/JobEntry.md
-docs/JobObj.md
-docs/JobObjVault.md
 docs/JobStats.md
-docs/JobUpload.md
 docs/Machine.md
 docs/ParDef.md
 docs/PushToComputeApi.md
@@ -50,10 +47,7 @@ jarviceapi_client/models/application.py
 jarviceapi_client/models/container.py
 jarviceapi_client/models/hpc_req.py
 jarviceapi_client/models/job_entry.py
-jarviceapi_client/models/job_obj.py
-jarviceapi_client/models/job_obj_vault.py
 jarviceapi_client/models/job_stats.py
-jarviceapi_client/models/job_upload.py
 jarviceapi_client/models/machine.py
 jarviceapi_client/models/par_def.py
 jarviceapi_client/models/queue.py
