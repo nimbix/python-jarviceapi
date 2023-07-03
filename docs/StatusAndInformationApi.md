@@ -100,7 +100,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **apps_get**
-> List[Dict] apps_get(apikey=apikey, username=username, name=name, version=version)
+> Dict[str, AppDef] apps_get(apikey=apikey, username=username, name=name, version=version)
 
 Returns the Application Definition (AppDef) for a given application.
 
@@ -153,7 +153,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[Dict]**
+[**Dict[str, AppDef]**](AppDef.md)
 
 ### Authorization
 
