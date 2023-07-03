@@ -233,7 +233,7 @@
                         "content": {
                             "*/*": {
                                 "schema": {
-                                    "type": "array",
+                                    "type": "object",
                                     "items": {
                                         "$ref": "#/components/schemas/AppDefs"
                                     }
