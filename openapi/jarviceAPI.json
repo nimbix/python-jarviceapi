@@ -235,7 +235,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/AppDef"
+                                        "$ref": "#/components/schemas/AppDefs"
                                     }
                                 }
                             }
@@ -2369,6 +2369,12 @@
                         "type": "string"
                     }
                 }
+            },   
+            "AppDefs": {
+                "type": "object",
+                "additionalProperties": {
+                    "$ref": "#/components/schemas/AppDef"
+                }
             },
             "AppDef": {
                 "type": "object",
@@ -2771,7 +2777,6 @@
                     }
                 }
             },
-            
             "MachineDefs": {
                 "type": "object",
                 "additionalProperties": {
