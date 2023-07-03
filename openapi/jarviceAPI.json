@@ -1050,11 +1050,7 @@
                         "content": {
                             "*/*": {
                                 "schema": {
-                                    "type": "object",
-                                    "additionalProperties": {
-                                        "type": "object",
-                                        "properties": {}
-                                    }
+                                    "$ref": "#/components/schemas/MachineDef"
                                 }
                             }
                         }
@@ -2773,6 +2769,86 @@
                     "type": {
                         "type": "string"
                     }
+                }
+            },
+            "MachineDef": {
+                "type": "object",
+                "properties": {
+                  "mc_arch": {
+                    "type": "string"
+                  },
+                  "mc_cores": {
+                    "type": "integer"
+                  },
+                  "mc_description": {
+                    "type": "string"
+                  },
+                  "mc_devices": {
+                    "type": "string"
+                  },
+                  "mc_gpus": {
+                    "type": "integer"
+                  },
+                  "mc_lesser": {
+                    "type": "integer"
+                  },
+                  "mc_max_concurrent": {
+                    "type": "integer"
+                  },
+                  "mc_name": {
+                    "type": "string"
+                  },
+                  "mc_price": {
+                    "type": "number"
+                  },
+                  "mc_priority": {
+                    "type": "integer"
+                  },
+                  "mc_privs": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "mc_properties": {
+                    "type": "string"
+                  },
+                  "mc_ram": {
+                    "type": "integer"
+                  },
+                  "mc_scale_max": {
+                    "type": "integer"
+                  },
+                  "mc_scale_min": {
+                    "type": "integer"
+                  },
+                  "mc_scale_select": {
+                    "type": "string"
+                  },
+                  "mc_sched_id": {
+                    "type": "integer"
+                  },
+                  "mc_scratch": {
+                    "type": "integer"
+                  },
+                  "mc_slave_cores": {
+                    "type": "integer"
+                  },
+                  "mc_slave_gpus": {
+                    "type": "integer"
+                  },
+                  "mc_slave_properties": {
+                    "type": "string"
+                  },
+                  "mc_slave_ram": {
+                    "type": "integer"
+                  },
+                  "mc_slots": {
+                    "type": "integer"
+                  },
+                  "mc_swap": {
+                    "type": "integer"
+                  }
                 }
             },
             "ParDef": {

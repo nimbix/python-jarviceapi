@@ -14,6 +14,7 @@ docs/JobControlApi.md
 docs/JobEntry.md
 docs/JobStats.md
 docs/Machine.md
+docs/MachineDef.md
 docs/ParDef.md
 docs/PushToComputeApi.md
 docs/Queue.md
@@ -50,6 +51,7 @@ jarviceapi_client/models/hpc_req.py
 jarviceapi_client/models/job_entry.py
 jarviceapi_client/models/job_stats.py
 jarviceapi_client/models/machine.py
+jarviceapi_client/models/machine_def.py
 jarviceapi_client/models/par_def.py
 jarviceapi_client/models/queue.py
 jarviceapi_client/models/rt_metrics_itemized.py
@@ -70,5 +72,5 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_runtime_info.py
+test/test_machine_def.py
 tox.ini

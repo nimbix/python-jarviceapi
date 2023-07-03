@@ -690,7 +690,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **machines_get**
-> Dict[str, object] machines_get(apikey, username, name=name, vault=vault)
+> MachineDef machines_get(apikey, username, name=name, vault=vault)
 
 Returns information about available machine type(s).
 
@@ -702,6 +702,7 @@ Returns information about available machine type(s). On success, a JSON payload 
 import time
 import os
 import jarviceapi_client
+from jarviceapi_client.models.machine_def import MachineDef
 from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
@@ -742,7 +743,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Dict[str, object]**
+[**MachineDef**](MachineDef.md)
 
 ### Authorization
 

@@ -15,7 +15,7 @@
 """
 
 
-__version__ = "1.0.2"
+__version__ = "1.0.3"
 
 # import apis into sdk package
 from jarviceapi_client.api.job_control_api import JobControlApi
@@ -44,6 +44,7 @@ from jarviceapi_client.models.hpc_req import HpcReq
 from jarviceapi_client.models.job_entry import JobEntry
 from jarviceapi_client.models.job_stats import JobStats
 from jarviceapi_client.models.machine import Machine
+from jarviceapi_client.models.machine_def import MachineDef
 from jarviceapi_client.models.par_def import ParDef
 from jarviceapi_client.models.queue import Queue
 from jarviceapi_client.models.rt_metrics_itemized import RTMetricsItemized

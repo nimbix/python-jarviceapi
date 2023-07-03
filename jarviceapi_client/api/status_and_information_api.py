@@ -26,6 +26,7 @@ from typing import Any, Dict, List, Optional, Union
 
 from jarviceapi_client.models.app_def import AppDef
 from jarviceapi_client.models.job_entry import JobEntry
+from jarviceapi_client.models.machine_def import MachineDef
 from jarviceapi_client.models.queue import Queue
 from jarviceapi_client.models.runtime_connect import RuntimeConnect
 from jarviceapi_client.models.runtime_info import RuntimeInfo
@@ -1541,7 +1542,7 @@ class StatusAndInformationApi(object):
             _request_auth=_params.get('_request_auth'))
 
     @validate_arguments
-    def machines_get(self, apikey : Annotated[StrictStr, Field(..., description="API key for user to authenticate ")], username : Annotated[StrictStr, Field(..., description="Name of user to authenticate")], name : Annotated[Optional[StrictStr], Field(description="Name of machine type to return information for")] = None, vault : Annotated[Optional[StrictStr], Field(description="Vault name to use for machine compatibility; if specified, response will be a list of machines that can be used against that vault; if not specified, the user's default vault is used to determine machine compatibility")] = None, **kwargs) -> Dict[str, object]:  # noqa: E501
+    def machines_get(self, apikey : Annotated[StrictStr, Field(..., description="API key for user to authenticate ")], username : Annotated[StrictStr, Field(..., description="Name of user to authenticate")], name : Annotated[Optional[StrictStr], Field(description="Name of machine type to return information for")] = None, vault : Annotated[Optional[StrictStr], Field(description="Vault name to use for machine compatibility; if specified, response will be a list of machines that can be used against that vault; if not specified, the user's default vault is used to determine machine compatibility")] = None, **kwargs) -> MachineDef:  # noqa: E501
         """Returns information about available machine type(s).  # noqa: E501
 
         Returns information about available machine type(s). On success, a JSON payload with machine information for each available machine type, or for the specific machine name if available. The machine name is used as the dictionary key.  # noqa: E501
@@ -1568,7 +1569,7 @@ class StatusAndInformationApi(object):
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: Dict[str, object]
+        :rtype: MachineDef
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -1616,7 +1617,7 @@ class StatusAndInformationApi(object):
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(Dict[str, object], status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(MachineDef, status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -1683,7 +1684,7 @@ class StatusAndInformationApi(object):
         _auth_settings = []  # noqa: E501
 
         _response_types_map = {
-            '200': "Dict[str, object]",
+            '200': "MachineDef",
             '400': "str",
             '401': None,
         }
