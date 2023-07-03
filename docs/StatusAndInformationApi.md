@@ -690,7 +690,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **machines_get**
-> MachineDef machines_get(apikey, username, name=name, vault=vault)
+> Dict[str, MachineDef] machines_get(apikey, username, name=name, vault=vault)
 
 Returns information about available machine type(s).
 
@@ -743,7 +743,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MachineDef**](MachineDef.md)
+[**Dict[str, MachineDef]**](MachineDef.md)
 
 ### Authorization
 

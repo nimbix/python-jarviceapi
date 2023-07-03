@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "jarviceapi_client"
-version = "1.0.3"
+version = "1.0.4"
 description = "Jarvice API"
 authors = ["Nimbix <support@nimbix.net>"]
 license = "Proprietary"

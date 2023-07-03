@@ -1050,7 +1050,7 @@
                         "content": {
                             "*/*": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/MachineDef"
+                                    "$ref": "#/components/schemas/MachineDefs"
                                 }
                             }
                         }
@@ -2769,6 +2769,13 @@
                     "type": {
                         "type": "string"
                     }
+                }
+            },
+            
+            "MachineDefs": {
+                "type": "object",
+                "additionalProperties": {
+                    "$ref": "#/components/schemas/MachineDef"
                 }
             },
             "MachineDef": {
