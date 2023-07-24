@@ -8,6 +8,7 @@ docs/AppDefCmd.md
 docs/AppDefIdent.md
 docs/AppDefImage.md
 docs/Application.md
+docs/Apps.md
 docs/Container.md
 docs/HpcReq.md
 docs/JobControlApi.md
@@ -46,6 +47,7 @@ jarviceapi_client/models/app_def_cmd.py
 jarviceapi_client/models/app_def_ident.py
 jarviceapi_client/models/app_def_image.py
 jarviceapi_client/models/application.py
+jarviceapi_client/models/apps.py
 jarviceapi_client/models/container.py
 jarviceapi_client/models/hpc_req.py
 jarviceapi_client/models/job_entry.py
@@ -72,4 +74,5 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_apps.py
 tox.ini

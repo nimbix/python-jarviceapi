@@ -25,6 +25,7 @@ from pydantic import Field, StrictBool, StrictInt, StrictStr
 from typing import Any, Dict, List, Optional, Union
 
 from jarviceapi_client.models.app_def import AppDef
+from jarviceapi_client.models.apps import Apps
 from jarviceapi_client.models.job_entry import JobEntry
 from jarviceapi_client.models.machine_def import MachineDef
 from jarviceapi_client.models.queue import Queue
@@ -212,7 +213,7 @@ class StatusAndInformationApi(object):
             _request_auth=_params.get('_request_auth'))
 
     @validate_arguments
-    def apps_get(self, apikey : Annotated[Optional[StrictStr], Field(description="API key for user to authenticate ")] = None, username : Annotated[Optional[StrictStr], Field(description="Name of user to authenticate - if unspecified, public apps only")] = None, name : Annotated[Optional[StrictStr], Field(description="Name of application to return information for")] = None, version : Annotated[Optional[StrictInt], Field(description="Filter applications by appdef version")] = None, **kwargs) -> Dict[str, AppDef]:  # noqa: E501
+    def apps_get(self, apikey : Annotated[Optional[StrictStr], Field(description="API key for user to authenticate ")] = None, username : Annotated[Optional[StrictStr], Field(description="Name of user to authenticate - if unspecified, public apps only")] = None, name : Annotated[Optional[StrictStr], Field(description="Name of application to return information for")] = None, version : Annotated[Optional[StrictInt], Field(description="Filter applications by appdef version")] = None, **kwargs) -> Apps:  # noqa: E501
         """Returns the Application Definition (AppDef) for a given application.  # noqa: E501
 
         On success, a JSON payload with application information for each available application, or for the specific application name if available. The application name is used as the dictionary key, and the data subkey contains the raw definition in JSON format. The price value is the application price itself, not including underlying machine price (which is available by querying the machine type using /jarvice/machines). Note that application name is the application ID, not necessarily the same as the human readable name in the AppDef for the given application.  # noqa: E501
@@ -239,7 +240,7 @@ class StatusAndInformationApi(object):
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: Dict[str, AppDef]
+        :rtype: Apps
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -287,7 +288,7 @@ class StatusAndInformationApi(object):
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(Dict[str, AppDef], status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(Apps, status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -354,7 +355,7 @@ class StatusAndInformationApi(object):
         _auth_settings = []  # noqa: E501
 
         _response_types_map = {
-            '200': "Dict[str, AppDef]",
+            '200': "Apps",
             '400': "str",
             '401': None,
         }

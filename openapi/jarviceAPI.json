@@ -233,7 +233,7 @@
                         "content": {
                             "*/*": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/AppDefs"
+                                    "$ref": "#/components/schemas/Apps"
                                 }
                             }
                         }
@@ -2367,10 +2367,48 @@
                     }
                 }
             },   
-            "AppDefs": {
+            "Apps": {
                 "type": "object",
-                "additionalProperties": {
-                    "$ref": "#/components/schemas/AppDef"
+                "properties": {
+                    "price": {
+                        "type": "number"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/AppDef"
+                    },
+                    "owner": {
+                        "type": "number"
+                    },
+                    "arch": {
+                        "type": "integer"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "privs": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "src": {
+                        "type": "string"
+                    },
+                    "updated": {
+                        "type": "integer"
+                    },
+                    "checkedout": {
+                        "type": "boolean"
+                    },
+                    "certified": {
+                        "type": "boolean"
+                    },
+                    "walltime": {
+                        "type": "string"
+                    },
+                    "repo": {
+                        "type": "string"
+                    }
                 }
             },
             "AppDef": {

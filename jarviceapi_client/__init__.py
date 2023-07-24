@@ -15,7 +15,7 @@
 """
 
 
-__version__ = "1.0.7"
+__version__ = "1.0.8"
 
 # import apis into sdk package
 from jarviceapi_client.api.job_control_api import JobControlApi
@@ -39,6 +39,7 @@ from jarviceapi_client.models.app_def_cmd import AppDefCmd
 from jarviceapi_client.models.app_def_ident import AppDefIdent
 from jarviceapi_client.models.app_def_image import AppDefImage
 from jarviceapi_client.models.application import Application
+from jarviceapi_client.models.apps import Apps
 from jarviceapi_client.models.container import Container
 from jarviceapi_client.models.hpc_req import HpcReq
 from jarviceapi_client.models.job_entry import JobEntry
