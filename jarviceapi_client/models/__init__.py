@@ -15,12 +15,12 @@
 
 
 # import models into model package
+from jarviceapi_client.models.app import App
 from jarviceapi_client.models.app_def import AppDef
 from jarviceapi_client.models.app_def_cmd import AppDefCmd
 from jarviceapi_client.models.app_def_ident import AppDefIdent
 from jarviceapi_client.models.app_def_image import AppDefImage
 from jarviceapi_client.models.application import Application
-from jarviceapi_client.models.apps import Apps
 from jarviceapi_client.models.container import Container
 from jarviceapi_client.models.hpc_req import HpcReq
 from jarviceapi_client.models.job_entry import JobEntry

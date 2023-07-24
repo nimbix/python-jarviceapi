@@ -2366,8 +2366,14 @@
                         "type": "string"
                     }
                 }
-            },   
+            },
             "Apps": {
+                "type": "object",
+                "additionalProperties": {
+                    "$ref": "#/components/schemas/App"
+                }
+            },   
+            "App": {
                 "type": "object",
                 "properties": {
                     "price": {

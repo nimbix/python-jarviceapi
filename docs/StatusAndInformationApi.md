@@ -100,7 +100,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **apps_get**
-> Apps apps_get(apikey=apikey, username=username, name=name, version=version)
+> Dict[str, App] apps_get(apikey=apikey, username=username, name=name, version=version)
 
 Returns the Application Definition (AppDef) for a given application.
 
@@ -112,7 +112,7 @@ On success, a JSON payload with application information for each available appli
 import time
 import os
 import jarviceapi_client
-from jarviceapi_client.models.apps import Apps
+from jarviceapi_client.models.app import App
 from jarviceapi_client.rest import ApiException
 from pprint import pprint
 
@@ -153,7 +153,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Apps**](Apps.md)
+[**Dict[str, App]**](App.md)
 
 ### Authorization
 
