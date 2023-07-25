@@ -2964,7 +2964,7 @@
                         "type": "string"
                     },
                     "value": {
-                        "type": "object"
+                        "type": "string"
                     },
                     "values": {
                         "type": "array",

@@ -15,7 +15,7 @@
 """
 
 
-__version__ = "1.0.9"
+__version__ = "1.0.10"
 
 # import apis into sdk package
 from jarviceapi_client.api.job_control_api import JobControlApi

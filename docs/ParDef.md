@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **step** | **str** |  | [optional] 
 **target** | **str** |  | [optional] 
 **type** | **str** |  | [optional] 
-**value** | **object** |  | [optional] 
+**value** | **str** |  | [optional] 
 **values** | **List[str]** |  | [optional] 
 **variable** | **bool** |  | [optional] 
 

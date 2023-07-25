@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from pydantic import BaseModel, Field, StrictBool, StrictStr, conlist
 
 class ParDef(BaseModel):
@@ -41,7 +41,7 @@ class ParDef(BaseModel):
     step: Optional[StrictStr] = None
     target: Optional[StrictStr] = None
     type: Optional[StrictStr] = None
-    value: Optional[Dict[str, Any]] = None
+    value: Optional[StrictStr] = None
     values: Optional[conlist(StrictStr)] = None
     variable: Optional[StrictBool] = None
     __properties = ["cmdscript", "description", "filter", "if", "ifnot", "max", "min", "mvalues", "name", "positional", "required", "size", "step", "target", "type", "value", "values", "variable"]
