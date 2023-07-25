@@ -19,8 +19,8 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, List, Optional, Union
-from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist
+from typing import Any, List, Optional
+from pydantic import BaseModel, Field, StrictBool, StrictStr, conlist
 
 class ParDef(BaseModel):
     """
@@ -31,8 +31,8 @@ class ParDef(BaseModel):
     filter: Optional[StrictStr] = None
     var_if: Optional[conlist(StrictStr)] = Field(None, alias="if")
     ifnot: Optional[conlist(StrictStr)] = None
-    max: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="We use Json.Number for max, min and step here because we need")
-    min: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="to detect a missing value")
+    max: Optional[Any] = None
+    min: Optional[Any] = None
     mvalues: Optional[conlist(StrictStr)] = None
     name: Optional[StrictStr] = None
     positional: Optional[StrictBool] = None
@@ -70,6 +70,16 @@ class ParDef(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if max (nullable) is None
+        # and __fields_set__ contains the field
+        if self.max is None and "max" in self.__fields_set__:
+            _dict['max'] = None
+
+        # set to None if min (nullable) is None
+        # and __fields_set__ contains the field
+        if self.min is None and "min" in self.__fields_set__:
+            _dict['min'] = None
+
         # set to None if value (nullable) is None
         # and __fields_set__ contains the field
         if self.value is None and "value" in self.__fields_set__:
