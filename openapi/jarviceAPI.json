@@ -2964,7 +2964,6 @@
                         "type": "string"
                     },
                     "value": {
-                        "type": "string"
                     },
                     "values": {
                         "type": "array",

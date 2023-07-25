@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 
-from typing import List, Optional
+from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictBool, StrictStr, conlist
 
 class ParDef(BaseModel):
@@ -41,7 +41,7 @@ class ParDef(BaseModel):
     step: Optional[StrictStr] = None
     target: Optional[StrictStr] = None
     type: Optional[StrictStr] = None
-    value: Optional[StrictStr] = None
+    value: Optional[Any] = None
     values: Optional[conlist(StrictStr)] = None
     variable: Optional[StrictBool] = None
     __properties = ["cmdscript", "description", "filter", "if", "ifnot", "max", "min", "mvalues", "name", "positional", "required", "size", "step", "target", "type", "value", "values", "variable"]
@@ -70,6 +70,11 @@ class ParDef(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if value (nullable) is None
+        # and __fields_set__ contains the field
+        if self.value is None and "value" in self.__fields_set__:
+            _dict['value'] = None
+
         return _dict
 
     @classmethod
