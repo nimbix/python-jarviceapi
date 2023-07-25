@@ -19,8 +19,8 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, List, Optional
-from pydantic import BaseModel, Field, StrictBool, StrictStr, conlist
+from typing import Any, List, Optional, Union
+from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist
 
 class ParDef(BaseModel):
     """
@@ -31,8 +31,8 @@ class ParDef(BaseModel):
     filter: Optional[StrictStr] = None
     var_if: Optional[conlist(StrictStr)] = Field(None, alias="if")
     ifnot: Optional[conlist(StrictStr)] = None
-    max: Optional[StrictStr] = Field(None, description="We use Json.Number for max, min and step here because we need")
-    min: Optional[StrictStr] = Field(None, description="to detect a missing value")
+    max: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="We use Json.Number for max, min and step here because we need")
+    min: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="to detect a missing value")
     mvalues: Optional[conlist(StrictStr)] = None
     name: Optional[StrictStr] = None
     positional: Optional[StrictBool] = None

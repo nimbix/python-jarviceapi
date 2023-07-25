@@ -2929,11 +2929,11 @@
                         }
                     },
                     "max": {
-                        "type": "string",
+                        "type": "number",
                         "description": "We use Json.Number for max, min and step here because we need"
                     },
                     "min": {
-                        "type": "string",
+                        "type": "number",
                         "description": "to detect a missing value"
                     },
                     "mvalues": {
