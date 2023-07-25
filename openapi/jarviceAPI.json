@@ -2386,7 +2386,7 @@
                         "type": "number"
                     },
                     "arch": {
-                        "type": "integer"
+                        "type": "string"
                     },
                     "id": {
                         "type": "string"

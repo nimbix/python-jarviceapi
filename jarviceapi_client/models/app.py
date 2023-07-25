@@ -30,7 +30,7 @@ class App(BaseModel):
     price: Optional[Union[StrictFloat, StrictInt]] = None
     data: Optional[AppDef] = None
     owner: Optional[Union[StrictFloat, StrictInt]] = None
-    arch: Optional[StrictInt] = None
+    arch: Optional[StrictStr] = None
     id: Optional[StrictStr] = None
     privs: Optional[conlist(StrictStr)] = None
     src: Optional[StrictStr] = None

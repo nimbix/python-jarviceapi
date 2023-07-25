@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **price** | **float** |  | [optional] 
 **data** | [**AppDef**](AppDef.md) |  | [optional] 
 **owner** | **float** |  | [optional] 
-**arch** | **int** |  | [optional] 
+**arch** | **str** |  | [optional] 
 **id** | **str** |  | [optional] 
 **privs** | **List[str]** |  | [optional] 
 **src** | **str** |  | [optional] 
